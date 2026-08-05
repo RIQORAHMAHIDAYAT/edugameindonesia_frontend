@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preview — Desktop + Tablet + Mobile | KEI</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        background: #0e1624;
+        color: #cbd5e1;
+        min-height: 100vh;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #111b2e;
+        border-bottom: 1px solid #1e293b;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      header h1 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      header p { font-size: 12px; color: #94a3b8; }
+
+      .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+      .actions a {
+        font-size: 12px;
+        font-weight: 600;
+        color: #ffffff;
+        background: #1d4ed8;
+        text-decoration: none;
+        padding: 7px 12px;
+        border-radius: 6px;
+        transition: background 0.15s;
+      }
+
+      .actions a:hover { background: #2563eb; }
+
+      .frames {
+        display: flex;
+        gap: 20px;
+        padding: 24px;
+        align-items: flex-start;
+        overflow-x: auto;
+      }
+
+      .frame {
+        flex-shrink: 0;
+        border: 1px solid #26334a;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+      }
+
+      .frame__bar {
+        background: #1e293b;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .frame__name { font-size: 12px; font-weight: 700; color: #ffffff; }
+
+      .frame__size { font-size: 11px; color: #94a3b8; }
+
+      iframe {
+        display: block;
+        border: 0;
+        background: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Preview Landing — Komunitas Edugame Indonesia</h1>
+        <p>Berikut tampilan live website pada Desktop, Tablet, dan Mobile.</p>
+      </div>
+      <div class="actions">
+        <a href="/" target="_blank">Buka Website</a>
+        <a href="/preview.html" target="_blank">Preview Baru</a>
+      </div>
+    </header>
+
+    <main class="frames">
+      <!-- Desktop 1440 -->
+      <section class="frame">
+        <div class="frame__bar">
+          <span class="frame__name">Desktop</span>
+          <span class="frame__size">1440 × 900</span>
+        </div>
+        <iframe src="/" width="1440" height="900" title="Preview Desktop"></iframe>
+      </section>
+
+      <!-- Tablet 768 -->
+      <section class="frame">
+        <div class="frame__bar">
+          <span class="frame__name">Tablet</span>
+          <span class="frame__size">768 × 1024</span>
+        </div>
+        <iframe src="/" width="768" height="1024" title="Preview Tablet"></iframe>
+      </section>
+
+      <!-- Mobile 390 -->
+      <section class="frame">
+        <div class="frame__bar">
+          <span class="frame__name">Mobile</span>
+          <span class="frame__size">390 × 844</span>
+        </div>
+        <iframe src="/" width="390" height="844" title="Preview Mobile"></iframe>
+      </section>
+    </main>
+  </body>
+</html>
