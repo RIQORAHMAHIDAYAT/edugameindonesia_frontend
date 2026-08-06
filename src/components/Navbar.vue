@@ -5,7 +5,6 @@ const isOpen = ref(false)
 
 const navLinks = [
   { label: 'BERANDA', href: '#beranda', active: true },
-  { label: 'CARA KERJA', href: '#cara-kerja', active: false },
   { label: 'TESTIMONI', href: '#testimoni', active: false },
   { label: 'FAQ', href: '#faq', active: false },
 ]

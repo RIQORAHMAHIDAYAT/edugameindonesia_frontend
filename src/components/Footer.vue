@@ -28,7 +28,6 @@
           <ul class="mt-4 space-y-2.5 text-sm text-white/80">
             <li><a href="#beranda" class="transition hover:text-white">Beranda</a></li>
             <li><a href="#fitur" class="transition hover:text-white">Fitur</a></li>
-            <li><a href="#cara-kerja" class="transition hover:text-white">Cara Kerja</a></li>
             <li><a href="#faq" class="transition hover:text-white">FAQ</a></li>
           </ul>
         </div>
