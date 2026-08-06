@@ -46,8 +46,9 @@
 .hero {
   background: #ffffff;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   min-height: 640px;
+  clip-path: inset(0 -2000px -2000px -2000px); /* clip top at hero boundary, allow blob to extend down & sides */
 }
 
 /*
@@ -57,13 +58,13 @@
 */
 .hero__blob {
   position: absolute;
-  top: 50%;
-  right: -260px;
-  transform: translateY(-50%) rotate(-13deg);
-  width: 1060px;
-  height: 880px;
+  top: 80%;
+  right: -100px;
+  transform: translateY(-50%) rotate(-9.5deg);
+  width: 1100px;
+  height: 900px;
   background: #e8eaf0;
-  border-radius: 130px;
+  border-radius: 90px;
   z-index: 0;
   pointer-events: none;
 }
@@ -210,6 +211,7 @@
     top: 50%;
     right: -90px;
     transform: translateY(-50%) rotate(-13deg);
+    border-radius: 35px;
   }
   .hero__container {
     grid-template-columns: 1fr;

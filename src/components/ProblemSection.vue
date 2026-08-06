@@ -52,6 +52,8 @@
 .problem-section {
   background: transparent;
   padding: 56px 0;
+  position: relative; /* ensure stacking context above hero blob */
+  z-index: 1;
 }
 
 .problem-container {
