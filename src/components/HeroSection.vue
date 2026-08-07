@@ -94,7 +94,7 @@
   font-size: 60px;
   font-weight: 900;
   line-height: 1.07;
-  color: #0b2d6e;
+  color: var(--color-primary);
   margin: 0 0 28px 0;
   letter-spacing: -2px;
 }
@@ -138,7 +138,7 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  background: #0b2d6e;
+  background: var(--color-primary);
   color: #ffffff;
   font-size: 13px;
   font-weight: 700;
@@ -152,7 +152,7 @@
 }
 
 .hero__cta:hover {
-  background: #143d8a;
+  background: var(--color-primary-hover);
 }
 
 /* ─── Right photo ─── */
@@ -182,7 +182,7 @@
   width: calc(100% + 80px);  /* Lebih lebar dari gambar */
   height: calc(100% - 120px); /* Lebih pendek dari gambar */
   background: #ffd700;
-  border: 2px solid #173B70;
+  border: 2px solid var(--color-primary);
   border-radius: 0;
 }
 
@@ -195,7 +195,7 @@
   object-position: top center;
   display: block;
   /* Border navy/dark blue tipis */
-  border: 2px solid #173B70;
+  border: 2px solid var(--color-primary);
   border-radius: 0; /* Kotak/sharp */
 }
 

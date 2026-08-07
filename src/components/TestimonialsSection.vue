@@ -149,7 +149,7 @@ const marqueeItems = [...testimonials, ...testimonials, ...testimonials]
 .section-title {
   font-size: 32px;
   font-weight: 800;
-  color: #173b70;
+  color: var(--color-primary);
   margin: 0;
   letter-spacing: -0.02em;
 }
@@ -243,7 +243,7 @@ const marqueeItems = [...testimonials, ...testimonials, ...testimonials]
 .user-name {
   font-size: 18px;
   font-weight: 800;
-  color: #173b70;
+  color: var(--color-primary);
   margin: 0 0 2px 0;
   line-height: 1.25;
 }

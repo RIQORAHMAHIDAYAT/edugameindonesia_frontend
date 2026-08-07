@@ -91,7 +91,7 @@ function closeMenu() {
   font-size: 38px;
   font-weight: 900;
   font-style: italic;
-  color: #0b2d6e;
+  color: var(--color-primary);
   text-decoration: none;
   letter-spacing: -1.5px;
   flex-shrink: 0;
@@ -119,19 +119,19 @@ function closeMenu() {
 }
 
 .nb__link:hover {
-  color: #0b2d6e;
+  color: var(--color-primary);
 }
 
 .nb__link--active {
-  color: #0b2d6e;
-  border-bottom-color: #0b2d6e;
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
 }
 
 /* ─── CTA ─── */
 .nb__cta {
   margin-left: 32px;
   flex-shrink: 0;
-  background: #0b2d6e;
+  background: var(--color-primary);
   color: #ffffff;
   font-size: 12.5px;
   font-weight: 700;
@@ -145,7 +145,7 @@ function closeMenu() {
 }
 
 .nb__cta:hover {
-  background: #143d8a;
+  background: var(--color-primary-hover);
 }
 
 /* ─── Hamburger ─── */
@@ -165,7 +165,7 @@ function closeMenu() {
   display: block;
   width: 22px;
   height: 2px;
-  background: #0b2d6e;
+  background: var(--color-primary);
   border-radius: 2px;
 }
 
@@ -191,7 +191,7 @@ function closeMenu() {
 
 .nb__mobile-link:hover {
   background: #f4f6fb;
-  color: #0b2d6e;
+  color: var(--color-primary);
 }
 
 .nb__cta--mobile {

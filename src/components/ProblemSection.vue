@@ -63,7 +63,7 @@
 }
 
 .problem-card {
-  background: #26559b;
+  background: var(--color-primary);
   border-radius: 12px;
   padding: 48px 64px;
   max-width: 1000px; /* Make the card itself narrower */

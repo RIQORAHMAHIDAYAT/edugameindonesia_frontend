@@ -102,7 +102,7 @@
 .features-title {
   font-size: 32px;
   font-weight: 800;
-  color: #173b70;
+  color: var(--color-primary);
   margin: 0 0 12px 0;
 }
 
@@ -144,7 +144,7 @@
 .card-training {
   flex: 0 0 350px;
   min-height: 560px; /* Clearly taller than the gray, white, and yellow boxes (not level) */
-  background-color: #1e3f6d;
+  background-color: var(--color-primary);
 }
 
 /* ── Card 2: Portofolio ── */
@@ -221,7 +221,7 @@
 }
 
 .icon-wrap--blue {
-  background-color: #2b5085;
+  background-color: var(--color-primary);
 }
 .icon-wrap--gray {
   background-color: #c9cbcd;
@@ -242,7 +242,7 @@
   color: #ffd700;
 }
 .icon-svg--dark {
-  color: #173b70;
+  color: var(--color-primary);
 }
 .icon-svg--brown {
   color: #714a13;
@@ -256,7 +256,7 @@
   line-height: 1.3;
 }
 .feature-title--dark {
-  color: #173b70;
+  color: var(--color-primary);
 }
 .feature-title--light {
   color: #ffffff;
