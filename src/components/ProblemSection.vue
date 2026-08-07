@@ -1,4 +1,23 @@
 <template>
+  <svg width="0" height="0" style="position: absolute; width: 0; height: 0" aria-hidden="true">
+    <defs>
+      <clipPath id="problem-card-clip" clipPathUnits="objectBoundingBox">
+        <path
+          d="M 0.120 0
+             L 0.986 0
+             A 0.014 0.030 0 0 1 1 0.030
+             L 1 0.447
+             A 0.260 0.553 0 0 1 0.740 1
+             L 0.014 1
+             A 0.014 0.030 0 0 1 0 0.970
+             L 0 0.255
+             A 0.120 0.255 0 0 1 0.120 0
+             Z"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+
   <section id="masalah" class="problem-section">
     <div class="problem-container">
       <div class="problem-card">
@@ -64,7 +83,7 @@
 
 .problem-card {
   background: var(--color-primary);
-  border-radius: 12px;
+  clip-path: url(#problem-card-clip);
   padding: 48px 64px;
   max-width: 1000px; /* Make the card itself narrower */
   margin: 0 auto; /* Center the card */
