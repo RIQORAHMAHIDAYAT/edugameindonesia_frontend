@@ -8,7 +8,7 @@ import ClosingCtaSection from '@/components/ClosingCtaSection.vue'
 </script>
 
 <template>
-  <main>
+  <main id="main-content" tabindex="-1">
     <HeroSection />
     <ProblemSection />
     <FeaturesSection />

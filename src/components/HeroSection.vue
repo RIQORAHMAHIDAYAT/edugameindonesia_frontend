@@ -32,7 +32,17 @@
       <!-- ── Right: Photo ── -->
       <div class="hero__photo-wrap">
         <div class="hero__photo-frame">
-          <img src="/hero-team.png" alt="Tim Edugame Indonesia berkolaborasi" class="hero__photo" />
+          <picture>
+            <source srcset="/hero-team.webp" type="image/webp" />
+            <img
+              src="/hero-team.png"
+              alt="Tim Edugame Indonesia berkolaborasi"
+              class="hero__photo"
+              width="430"
+              height="550"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
       </div>
     </div>

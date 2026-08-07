@@ -83,12 +83,19 @@ const marqueeItems = [...testimonials, ...testimonials, ...testimonials]
             >
               <!-- Card Header: Photo + User Details -->
               <div class="card-header">
-                <img
-                  :src="item.photo"
-                  :alt="item.name"
-                  class="avatar-img"
-                  loading="lazy"
-                />
+                <picture>
+                  <source
+                    :srcset="item.photo.replace('.png', '.webp')"
+                    type="image/webp"
+                  />
+                  <img
+                    :src="item.photo"
+                    :alt="item.name"
+                    class="avatar-img"
+                    width="58"
+                    height="58"
+                  />
+                </picture>
                 <div class="user-info">
                   <h3 class="user-name">{{ item.name }}</h3>
                   <p class="user-role">{{ item.role }}</p>

@@ -1,13 +1,52 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 const isOpen = ref(false)
+const activeSection = ref('beranda')
 
 const navLinks = [
-  { label: 'BERANDA', href: '#beranda', active: true },
-  { label: 'TESTIMONI', href: '#testimoni', active: false },
-  { label: 'FAQ', href: '#faq', active: false },
+  { label: 'BERANDA', href: '#beranda', id: 'beranda' },
+  { label: 'TESTIMONI', href: '#testimoni', id: 'testimoni' },
+  { label: 'FAQ', href: '#faq', id: 'faq' },
 ]
+
+const sectionIds = navLinks.map((link) => link.id)
+
+let ticking = false
+
+function updateActiveSection() {
+  if (ticking) return
+  ticking = true
+  requestAnimationFrame(() => {
+    ticking = false
+    const probe = window.scrollY + 120
+    let current = sectionIds[0] ?? 'beranda'
+
+    for (const id of sectionIds) {
+      const el = document.getElementById(id)
+      if (!el || el.offsetTop > probe) break
+      current = id
+    }
+
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 4
+    ) {
+      current = sectionIds[sectionIds.length - 1] ?? current
+    }
+
+    activeSection.value = current
+  })
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', updateActiveSection, { passive: true })
+  updateActiveSection()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', updateActiveSection)
+})
 
 function closeMenu() {
   isOpen.value = false
@@ -27,7 +66,7 @@ function closeMenu() {
           :key="link.href"
           :href="link.href"
           class="nb__link"
-          :class="{ 'nb__link--active': link.active }"
+          :class="{ 'nb__link--active': activeSection === link.id }"
           @click="closeMenu"
         >
           {{ link.label }}
@@ -41,7 +80,8 @@ function closeMenu() {
       <button
         class="nb__ham"
         :aria-expanded="isOpen"
-        aria-label="Toggle menu"
+        aria-controls="mobile-menu"
+        aria-label="Buka menu"
         @click="isOpen = !isOpen"
       >
         <span></span><span></span><span></span>
@@ -49,7 +89,7 @@ function closeMenu() {
     </div>
 
     <!-- Mobile dropdown -->
-    <div v-if="isOpen" class="nb__mobile">
+    <div v-if="isOpen" id="mobile-menu" class="nb__mobile">
       <a
         v-for="link in navLinks"
         :key="link.href"
