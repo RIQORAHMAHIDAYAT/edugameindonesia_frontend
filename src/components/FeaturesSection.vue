@@ -3,9 +3,9 @@
     <div class="features-container">
       <!-- Header -->
       <div class="features-header">
-        <h2 class="features-title">Fitur Unggulan Ekosistem Kami</h2>
+        <h2 class="features-title">Apa Solusi Yang Kami Lakukan?</h2>
         <p class="features-subtitle">
-          Kami menyediakan segala yang kamu butuhkan untuk naik level dari hobi menjadi profesional.
+          Komunitas Edugame Indonesia adalah ekosistem terpadu tempat kamu bisa belajar, berkarya, dan membangun karier di industri game edukasi. Kami hadir untuk membantu memajukan ide-idemu dari sekadar konsep hingga menjadi produk yang diakui dan menghasilkan.
         </p>
       </div>
 
@@ -84,7 +84,7 @@
 /* ── Section ── */
 .features-section {
   background-color: #ffffff;
-  padding: 80px 0;
+  padding: 40px 0 80px 0;
 }
 
 .features-container {
@@ -109,7 +109,9 @@
 .features-subtitle {
   font-size: 16px;
   color: #64748b;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 800px;
+  line-height: 1.6;
 }
 
 /* ── Layout ── */

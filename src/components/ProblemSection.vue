@@ -1,6 +1,7 @@
 <template>
   <svg width="0" height="0" style="position: absolute; width: 0; height: 0" aria-hidden="true">
     <defs>
+      <!-- Desktop clip-path (wide/short aspect ratio) -->
       <clipPath id="problem-card-clip" clipPathUnits="objectBoundingBox">
         <path
           d="M 0.120 0
@@ -15,50 +16,70 @@
              Z"
         />
       </clipPath>
+      <!-- Mobile clip-path (tall/narrow ~1:2 aspect ratio)
+           Proportional quarter-ellipse arcs matching the exact design screenshot:
+           - Top-left arc: starts x=0.35 on top, y=0.18 on left (A 0.35 0.18)
+           - Bottom-right arc: starts y=0.72 on right, x=0.45 on bottom (A 0.55 0.28) -->
+      <clipPath id="problem-card-clip-mobile" clipPathUnits="objectBoundingBox">
+        <path
+          d="M 0.35 0
+             L 0.97 0
+             A 0.03 0.015 0 0 1 1 0.015
+             L 1 0.72
+             A 0.55 0.28 0 0 1 0.45 1
+             L 0.03 1
+             A 0.03 0.015 0 0 1 0 0.985
+             L 0 0.18
+             A 0.35 0.18 0 0 1 0.35 0
+             Z"
+        />
+      </clipPath>
     </defs>
   </svg>
 
   <section id="masalah" class="problem-section">
     <div class="problem-container">
-      <div class="problem-card">
-        <!-- Baris 1: judul kiri + pain 1 kanan -->
-        <div class="row row--1">
-          <div class="problem-title-wrap">
-            <h2 class="problem-title">
-              Kenapa Kreator<br />
-              Edugame Sering<br />
-              <span class="problem-title-highlight">Stuck?</span>
-            </h2>
+      <div class="problem-card-border">
+        <div class="problem-card">
+          <!-- Baris 1: judul kiri + pain 1 kanan -->
+          <div class="row row--1">
+            <div class="problem-title-wrap">
+              <h2 class="problem-title">
+                Kenapa Kreator<br />
+                Edugame Sering<br />
+                <span class="problem-title-highlight">Stuck?</span>
+              </h2>
+            </div>
+
+            <div class="pain-card">
+              <h3 class="pain-title">Karya Bagus, Tapi Sepi Pembeli</h3>
+              <p class="pain-desc">
+                Sudah susah payah bikin edugame keren, tapi bingung cara
+                memasarkannya ke sekolah, industri, atau investor.
+              </p>
+            </div>
           </div>
 
-          <div class="pain-card">
-            <h3 class="pain-title">Karya Bagus, Tapi Sepi Pembeli</h3>
-            <p class="pain-desc">
-              Sudah susah payah bikin edugame keren, tapi bingung cara
-              memasarkannya ke sekolah, industri, atau investor.
-            </p>
+          <!-- Baris 2: pain 2 tengah -->
+          <div class="row row--2">
+            <div class="pain-card pain-card--center">
+              <h3 class="pain-title">Skill Autodidak Masih Nanggung</h3>
+              <p class="pain-desc">
+                Ingin bikin game edukasi yang benar-benar interaktif, tapi bingung
+                cara memadukan desain game yang seru dengan kurikulum pelajaran.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <!-- Baris 2: pain 2 tengah -->
-        <div class="row row--2">
-          <div class="pain-card pain-card--center">
-            <h3 class="pain-title">Skill Autodidak Masih Nanggung</h3>
-            <p class="pain-desc">
-              Ingin bikin game edukasi yang benar-benar interaktif, tapi bingung
-              cara memadukan desain game yang seru dengan kurikulum pelajaran.
-            </p>
-          </div>
-        </div>
-
-        <!-- Baris 3: pain 3 kiri -->
-        <div class="row row--3">
-          <div class="pain-card pain-card--left">
-            <h3 class="pain-title">Merasa Berjuang Sendirian</h3>
-            <p class="pain-desc">
-              Sulit menemukan teman satu visi, mentor tempat bertanya, maupun
-              panggung yang tepat untuk memvalidasi dan memamerkan karya.
-            </p>
+          <!-- Baris 3: pain 3 kiri -->
+          <div class="row row--3">
+            <div class="pain-card pain-card--left">
+              <h3 class="pain-title">Merasa Berjuang Sendirian</h3>
+              <p class="pain-desc">
+                Sulit menemukan teman satu visi, mentor tempat bertanya, maupun
+                panggung yang tepat untuk memvalidasi dan memamerkan karya.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -70,7 +91,7 @@
 /* ── Section ── */
 .problem-section {
   background: transparent;
-  padding: 56px 0;
+  padding: 48px 0 24px 0;
   position: relative; /* ensure stacking context above hero blob */
   z-index: 1;
 }
@@ -81,12 +102,19 @@
   padding: 0 40px;
 }
 
+.problem-card-border {
+  background: var(--color-accent);
+  clip-path: url(#problem-card-clip);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3px; /* Ketebalan garis tepi kuning */
+}
+
 .problem-card {
   background: var(--color-primary);
   clip-path: url(#problem-card-clip);
   padding: 48px 64px;
-  max-width: 1000px; /* Make the card itself narrower */
-  margin: 0 auto; /* Center the card */
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -173,8 +201,14 @@
     padding: 0 24px;
   }
 
+  .problem-card-border {
+    clip-path: url(#problem-card-clip-mobile);
+    padding: 3px;
+  }
+
   .problem-card {
-    padding: 32px 24px;
+    clip-path: url(#problem-card-clip-mobile);
+    padding: 44px 24px 80px 24px;
     gap: 24px;
   }
 
@@ -183,24 +217,39 @@
     gap: 24px;
   }
 
+  .row--1 {
+    align-items: flex-start; /* Prevent items from being pushed right in column direction */
+  }
+
   .row--2 {
     padding-left: 0;
+    padding-right: 0;
+  }
+
+  .row--3 {
+    padding-right: 0; /* Reset the 200px right padding on mobile */
   }
 
   .problem-title-wrap {
     flex: none;
+    width: 100%;
   }
 
   .problem-title {
-    font-size: 34px;
+    font-size: 28px;
+    text-align: right; /* Sesuai desain: Stuck? di kanan */
+  }
+
+  .pain-card {
+    width: 100%;
   }
 
   .pain-title {
-    font-size: 21px;
+    font-size: 18px;
   }
 
   .pain-desc {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 </style>

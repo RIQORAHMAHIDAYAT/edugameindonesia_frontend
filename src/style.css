@@ -24,7 +24,12 @@ body {
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* prevent horizontal scroll from hero blob */
+}
+
+html,
+body {
+  overflow-x: hidden; /* fallback: browser lama */
+  overflow-x: clip; /* hapus sisa lebar halaman tanpa jadi scroll container */
 }
 
 .skip-link {
