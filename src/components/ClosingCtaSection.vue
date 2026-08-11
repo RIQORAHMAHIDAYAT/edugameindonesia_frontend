@@ -10,8 +10,7 @@
     </div>
 
     <div class="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-      <span class="text-4xl" aria-hidden="true">🚀</span>
-      <h2 class="mt-4 text-3xl font-extrabold sm:text-4xl">
+      <h2 class="text-3xl font-extrabold sm:text-4xl">
         Siap Level Up Karier Edugamemu?
       </h2>
       <p class="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">

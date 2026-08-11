@@ -29,7 +29,7 @@ const faqs = [
       <div class="text-center">
         <p class="text-sm font-bold uppercase tracking-widest text-primary">FAQ</p>
         <h2 class="mt-3 text-2xl font-extrabold text-slate-900 sm:text-3xl">
-          Pertanyaan yang Sering Ditanyakan
+          Pertanyaan Umum
         </h2>
       </div>
 
@@ -44,11 +44,11 @@ const faqs = [
           >
             {{ faq.q }}
             <span
-              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-light text-primary transition group-open:rotate-45"
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-light text-primary transition duration-300 group-open:rotate-180"
               aria-hidden="true"
             >
               <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" d="M12 5v14M5 12h14" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </span>
           </summary>

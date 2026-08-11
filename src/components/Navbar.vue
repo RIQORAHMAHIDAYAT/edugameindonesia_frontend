@@ -99,9 +99,6 @@ function closeMenu() {
       >
         {{ link.label }}
       </a>
-      <a href="#gabung" class="nb__cta nb__cta--mobile" @click="closeMenu">
-        GABUNG KOMUNITAS
-      </a>
     </div>
   </header>
 </template>
@@ -234,19 +231,26 @@ function closeMenu() {
   color: var(--color-primary);
 }
 
-.nb__cta--mobile {
-  margin-left: 0;
-  text-align: center;
-  display: block;
-  margin-top: 8px;
-  border-radius: 4px;
-}
-
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
-  .nb__nav  { display: none; }
-  .nb__cta:not(.nb__cta--mobile) { display: none; }
-  .nb__ham  { display: flex; }
-  .nb__inner { padding: 0 20px; }
+  .nb__nav {
+    display: none;
+  }
+  .nb__cta {
+    margin-left: auto;
+    font-size: 11px;
+    padding: 8px 14px;
+  }
+  .nb__ham {
+    display: flex;
+    margin-left: 12px;
+  }
+  .nb__inner {
+    padding: 0 16px;
+  }
+  .nb__logo {
+    font-size: 28px;
+    margin-right: 12px;
+  }
 }
 </style>
