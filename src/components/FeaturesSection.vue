@@ -9,69 +9,80 @@
         </p>
       </div>
 
-      <!-- Asymmetric Flex Layout -->
-      <div class="features-flex">
-        
-        <!-- Left Card: Pelatihan & Workshop Terarah -->
-        <div class="feature-card card-training">
-          <div class="icon-wrap icon-wrap--blue">
-            <svg class="icon-svg icon-svg--yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
-            </svg>
+      <!-- Main Content Grid / Wrapper -->
+      <div class="features-grid">
+        <!-- Card 1: Portofolio & Katalog Karya (gambar_2.png) -->
+        <div class="feature-card card-portfolio">
+          <div class="card-image-wrap">
+            <img
+              src="/gambar_2.png"
+              alt="Portofolio & Katalog Karya"
+              class="card-img"
+              loading="lazy"
+            />
           </div>
-          <h3 class="feature-title feature-title--light feature-title--large">
-            Pelatihan &<br/>Workshop<br/>Terarah
-          </h3>
-          <p class="feature-desc feature-desc--light feature-desc--large">
-            Tingkatkan skill game design dan pemahaman kurikulum langsung dari para praktisi expert melalui mentoring eksklusif.
-          </p>
+          <div class="card-content">
+            <h3 class="feature-title feature-title--dark">Portofolio & Katalog Karya</h3>
+            <p class="feature-desc feature-desc--dark">
+              Tampilkan edugame buatanmu dalam etalase profesional agar mudah ditemukan oleh pengguna, sekolah, dan calon klien.
+            </p>
+          </div>
         </div>
 
-        <!-- Right Side Wrapper -->
-        <div class="right-wrapper">
-          <!-- Top Row: Gray and White Boxes -->
-          <div class="right-top-row">
-            <!-- Center Top Card: Portofolio -->
-            <div class="feature-card card-portfolio">
-              <div class="icon-wrap icon-wrap--gray">
-                <svg class="icon-svg icon-svg--dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
-              </div>
-              <h3 class="feature-title feature-title--dark">Portofolio & Katalog Karya</h3>
-              <p class="feature-desc feature-desc--dark">
-                Tampilkan edugame buatanmu dalam etalase profesional agar mudah ditemukan oleh pengguna, sekolah, dan calon klien.
-              </p>
-            </div>
-
-            <!-- Right Top Card: Festival Nasional -->
-            <div class="feature-card card-festival">
-              <div class="icon-wrap icon-wrap--lightgray">
-                <svg class="icon-svg icon-svg--dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                </svg>
-              </div>
-              <h3 class="feature-title feature-title--dark">Festival Nasional</h3>
-              <p class="feature-desc feature-desc--dark">
-                Panggung prestisius tahunan untuk memamerkan karya terbaikmu dan meraih penghargaan di level nasional.
-              </p>
-            </div>
+        <!-- Card 2: Festival Nasional (gambar_3.png) -->
+        <div class="feature-card card-festival">
+          <div class="card-image-wrap">
+            <img
+              src="/gambar_3.png"
+              alt="Festival Nasional"
+              class="card-img"
+              loading="lazy"
+            />
           </div>
+          <div class="card-content">
+            <h3 class="feature-title feature-title--dark">Festival Nasional</h3>
+            <p class="feature-desc feature-desc--dark">
+              Panggung prestisius tahunan untuk memamerkan karya terbaikmu dan meraih penghargaan di level nasional.
+            </p>
+          </div>
+        </div>
 
-          <!-- Bottom Card: Business Matching -->
-          <div class="feature-card card-business">
-            <div class="card-business-inner">
-              <div class="icon-wrap icon-wrap--white">
-                <svg class="icon-svg icon-svg--brown" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <div class="business-text">
-                <h3 class="feature-title feature-title--dark">Business Matching</h3>
-                <p class="feature-desc feature-desc--dark">
-                  Terhubung langsung dengan jaringan sekolah mitra, publisher game, hingga investor potensial untuk komersialisasi.
-                </p>
-              </div>
+        <!-- Card 3: Pelatihan & Workshop Terarah (gambar_1.png) -->
+        <div class="feature-card card-training">
+          <div class="card-image-wrap card-image-wrap--training">
+            <img
+              src="/gambar_1.png"
+              alt="Pelatihan & Workshop Terarah"
+              class="card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-content card-content--training">
+            <h3 class="feature-title feature-title--light">
+              Pelatihan & Workshop<br />Terarah
+            </h3>
+            <p class="feature-desc feature-desc--light">
+              Tingkatkan skill game design dan pemahaman kurikulum langsung dari para praktisi expert melalui mentoring eksklusif.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4: Business Matching (gambar_4.png) -->
+        <div class="feature-card card-business">
+          <div class="card-business-inner">
+            <div class="card-image-wrap card-image-wrap--business">
+              <img
+                src="/gambar_4.png"
+                alt="Business Matching"
+                class="card-img"
+                loading="lazy"
+              />
+            </div>
+            <div class="business-text">
+              <h3 class="feature-title feature-title--dark">Business Matching</h3>
+              <p class="feature-desc feature-desc--dark">
+                Terhubung langsung dengan jaringan sekolah mitra, publisher game, hingga investor potensial untuk komersialisasi.
+              </p>
             </div>
           </div>
         </div>
@@ -83,121 +94,75 @@
 <style scoped>
 /* ── Section ── */
 .features-section {
-  background-color: #ffffff;
-  padding: 40px 0 80px 0;
+  background-color: #f8fafc;
+  padding: 60px 0 80px 0;
 }
 
 .features-container {
-  max-width: 1200px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 24px;
 }
 
 /* ── Header ── */
 .features-header {
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 48px;
 }
 
 .features-title {
   font-size: 32px;
   font-weight: 800;
-  color: var(--color-primary);
-  margin: 0 0 12px 0;
+  color: #0056a4;
+  margin: 0 0 16px 0;
 }
 
 .features-subtitle {
-  font-size: 16px;
-  color: #64748b;
+  font-size: 15px;
+  color: #4b5563;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 780px;
   line-height: 1.6;
 }
 
-/* ── Layout ── */
-.features-flex {
-  display: flex;
+/* ── Desktop Grid Layout ── */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.15fr;
+  grid-template-rows: auto auto;
   gap: 24px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
-.right-wrapper {
-  flex: 1;
-  align-self: center; /* Vertically center the gray/white/yellow group against the blue card */
-  display: flex;
-  flex-direction: column;
-  gap: 24px; /* Close to the yellow box */
-}
-
-.right-top-row {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start; /* Ensures cards don't stretch to be equal height */
-}
-
-.feature-card {
-  border-radius: 24px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ── Card 1: Pelatihan ── */
-.card-training {
-  flex: 0 0 350px;
-  min-height: 560px; /* Clearly taller than the gray, white, and yellow boxes (not level) */
-  background-color: var(--color-primary);
-}
-
-/* ── Card 2: Portofolio ── */
+/* Card 1: Portofolio */
 .card-portfolio {
-  flex: 0 0 350px; /* Same width as the blue card */
-  min-height: 236px; /* Same height as the white card */
-  padding: 20px 28px; /* Compact padding */
-  background-color: #dadbd9; /* Light grey */
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  background-color: #ccd2d9;
 }
 
-.card-portfolio .icon-wrap {
-  margin-bottom: 16px;
+.card-portfolio .card-image-wrap {
+  aspect-ratio: 16 / 11;
 }
 
-.card-portfolio .feature-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.card-portfolio .feature-desc {
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-/* ── Card 3: Festival ── */
+/* Card 2: Festival */
 .card-festival {
-  flex: 0 0 350px; /* Same width as the gray card */
-  min-height: 236px; /* Same height as the gray card */
-  padding: 20px 28px; /* Same padding as the gray card */
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
   background-color: #ffffff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e2e8f0;
 }
 
-.card-festival .icon-wrap {
-  margin-bottom: 16px;
+.card-festival .card-image-wrap {
+  aspect-ratio: 16 / 11;
 }
 
-.card-festival .feature-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.card-festival .feature-desc {
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-/* ── Card 4: Business ── */
+/* Card 4: Business Matching */
 .card-business {
-  background-color: #ffd700; /* Yellow */
-  margin: 0 100px; /* Indents the box, narrower than the gray + white boxes above */
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  background-color: #f7d046;
+  padding: 20px 28px;
   justify-content: center;
 }
 
@@ -207,116 +172,201 @@
   gap: 24px;
 }
 
+.card-image-wrap--business {
+  flex: 0 0 44%;
+  border-radius: 20px;
+  aspect-ratio: 16 / 10;
+  background: transparent;
+}
+
 .business-text {
   flex: 1;
+  text-align: left;
 }
 
-/* ── Icons ── */
-.icon-wrap {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
+.business-text .feature-title {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.business-text .feature-desc {
+  text-align: left;
+}
+
+/* Card 3: Pelatihan & Workshop Terarah (Right Tall Card) */
+.card-training {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+  background-color: #175499;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.card-image-wrap--training {
+  aspect-ratio: 16 / 13;
+}
+
+.card-content--training {
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.card-content--training .feature-title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  line-height: 1.35;
+}
+
+.card-content--training .feature-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ── Card Base ── */
+.feature-card {
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-image-wrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f1f5f9;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-content {
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin-bottom: 32px;
-}
-
-.icon-wrap--blue {
-  background-color: var(--color-primary);
-}
-.icon-wrap--gray {
-  background-color: #c9cbcd;
-}
-.icon-wrap--lightgray {
-  background-color: #f3f4f6;
-}
-.icon-wrap--white {
-  background-color: #ffffff;
-}
-
-.icon-svg {
-  width: 32px;
-  height: 32px;
-}
-
-.icon-svg--yellow {
-  color: #ffd700;
-}
-.icon-svg--dark {
-  color: var(--color-primary);
-}
-.icon-svg--brown {
-  color: #714a13;
+  flex: 1;
 }
 
 /* ── Typography ── */
 .feature-title {
-  font-size: 20px;
-  font-weight: 800;
-  margin: 0 0 16px 0;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
   line-height: 1.3;
 }
+
 .feature-title--dark {
-  color: var(--color-primary);
+  color: #0b457f;
 }
+
 .feature-title--light {
   color: #ffffff;
 }
-.feature-title--large {
-  font-size: 34px;
-  font-weight: 400; /* As seen in reference image */
-  margin-bottom: 32px;
-}
 
 .feature-desc {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 13.5px;
+  line-height: 1.55;
   margin: 0;
 }
+
 .feature-desc--dark {
-  color: #4b5563;
+  color: #334155;
 }
+
 .feature-desc--light {
-  color: rgba(255, 255, 255, 0.85);
-}
-.feature-desc--large {
-  font-size: 20px; /* Larger description for training card */
+  color: rgba(255, 255, 255, 0.9);
 }
 
-/* ── Responsive ── */
-@media (max-width: 992px) {
-  .features-flex {
+/* ── Responsive Tablet & Mobile ── */
+@media (max-width: 960px) {
+  .features-grid {
+    display: flex;
     flex-direction: column;
+    gap: 24px;
   }
-  .right-wrapper {
-    align-self: stretch; /* Restore full width on tablet/mobile */
+
+  /* Urutan saat di Mobile/Tablet:
+     1. Portofolio & Katalog Karya (order: 1)
+     2. Pelatihan & Workshop Terarah (order: 2)
+     3. Festival Nasional (order: 3)
+     4. Business Matching (order: 4)
+  */
+  .card-portfolio {
+    order: 1;
+    width: 100%;
   }
+
   .card-training {
-    flex: auto;
+    order: 2;
     width: 100%;
-    min-height: auto;
+  }
+
+  .card-festival {
+    order: 3;
+    width: 100%;
+  }
+
+  .card-business {
+    order: 4;
+    width: 100%;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
+  .features-section {
+    padding: 40px 0 60px 0;
+  }
+
   .features-container {
-    padding: 0 24px;
+    padding: 0 16px;
   }
-  .right-top-row {
-    flex-direction: column;
+
+  .features-title {
+    font-size: 24px;
   }
-  .card-portfolio, .card-festival {
-    flex: auto;
-    width: 100%;
-    min-height: auto;
+
+  .features-subtitle {
+    font-size: 14px;
   }
+
+  .features-grid {
+    gap: 20px;
+  }
+
   .card-business {
-    margin: 0; /* Remove indent on small screens */
+    padding: 20px 18px;
   }
+
   .card-business-inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .card-image-wrap--business {
+    flex: auto;
+    width: 100%;
+  }
+
+  .business-text {
+    text-align: center;
+  }
+
+  .business-text .feature-title,
+  .business-text .feature-desc {
+    text-align: center;
   }
 }
 </style>

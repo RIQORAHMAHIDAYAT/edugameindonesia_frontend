@@ -94,6 +94,7 @@ const marqueeItems = [...testimonials, ...testimonials, ...testimonials]
                     class="avatar-img"
                     width="58"
                     height="58"
+                    loading="lazy"
                   />
                 </picture>
                 <div class="user-info">
@@ -142,6 +143,14 @@ const marqueeItems = [...testimonials, ...testimonials, ...testimonials]
   background-color: #edf3f8;
   border-radius: 50%;
   pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .deco-oval {
+    border-radius: 40% / 50%;
+    left: -30%;
+    width: 160%;
+  }
 }
 
 /* ── Header ── */

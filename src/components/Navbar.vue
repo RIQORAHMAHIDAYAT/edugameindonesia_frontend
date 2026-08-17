@@ -5,12 +5,12 @@ const isOpen = ref(false)
 const activeSection = ref('beranda')
 
 const navLinks = [
-  { label: 'BERANDA', href: '#beranda', id: 'beranda' },
-  { label: 'TESTIMONI', href: '#testimoni', id: 'testimoni' },
+  { label: 'TENTANG', href: '#masalah', id: 'masalah' },
+  { label: 'PROGRAM', href: '#fitur', id: 'fitur' },
   { label: 'FAQ', href: '#faq', id: 'faq' },
 ]
 
-const sectionIds = navLinks.map((link) => link.id)
+const sectionIds = ['beranda', 'masalah', 'fitur', 'faq']
 
 let ticking = false
 
@@ -42,6 +42,12 @@ function updateActiveSection() {
 onMounted(() => {
   window.addEventListener('scroll', updateActiveSection, { passive: true })
   updateActiveSection()
+  window.addEventListener('click', (e) => {
+    const nav = document.querySelector('.nb');
+    if (nav && !nav.contains(e.target as Node)) {
+      closeMenu();
+    }
+  });
 })
 
 onBeforeUnmount(() => {
@@ -57,7 +63,9 @@ function closeMenu() {
   <header class="nb">
     <div class="nb__inner">
       <!-- Logo -->
-      <a href="#beranda" class="nb__logo" @click="closeMenu">LOGO</a>
+      <a href="#beranda" class="nb__logo" @click="closeMenu">
+        LOGO
+      </a>
 
       <!-- Centre links -->
       <nav class="nb__nav" aria-label="Navigasi utama">
@@ -125,15 +133,18 @@ function closeMenu() {
 
 /* ─── Logo ─── */
 .nb__logo {
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 900;
-  font-style: italic;
   color: var(--color-primary);
   text-decoration: none;
-  letter-spacing: -1.5px;
+  letter-spacing: -1px;
   flex-shrink: 0;
   margin-right: 48px;
   line-height: 1;
+}
+
+.nb__logo-accent {
+  color: var(--color-accent);
 }
 
 /* ─── Nav links ─── */

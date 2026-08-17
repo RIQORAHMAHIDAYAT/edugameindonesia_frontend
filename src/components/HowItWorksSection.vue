@@ -4,9 +4,9 @@
       <!-- Section Title -->
       <h2 class="steps-main-title">3 Langkah Mudah Memulai</h2>
 
-      <!-- Timeline Wrapper -->
-      <div class="steps-timeline">
-        <!-- SVG Connecting Dashed Line for Desktop -->
+      <!-- Desktop Timeline (Visible on Large Screens) -->
+      <div class="steps-timeline desktop-only">
+        <!-- SVG Connecting Dashed Line -->
         <svg class="steps-svg-line" viewBox="0 0 1000 480" fill="none" preserveAspectRatio="none" aria-hidden="true">
           <path
             d="M 570 65 L 430 240 L 570 415"
@@ -16,7 +16,7 @@
           />
         </svg>
 
-        <!-- Step 1: Text Left (col 1), Badge Right (col 2) -->
+        <!-- Step 1: Text Left, Badge Right -->
         <div class="step-row">
           <div class="step-cell step-cell--text-right">
             <h3 class="step-title">Buat Profil & Daftarkan Karyamu</h3>
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <!-- Step 2: Badge Left (col 1), Text Right (col 2) -->
+        <!-- Step 2: Badge Left, Text Right -->
         <div class="step-row">
           <div class="step-cell step-cell--badge-right">
             <div class="step-badge">
@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <!-- Step 3: Text Left (col 1), Badge Right (col 2) -->
+        <!-- Step 3: Text Left, Badge Right -->
         <div class="step-row">
           <div class="step-cell step-cell--text-right">
             <h3 class="step-title">Hubungkan ke Mitra & Monetisasi</h3>
@@ -59,6 +59,48 @@
               <span>03</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Mobile List (Visible on Small Screens) - Matches Image Exactly -->
+      <div class="steps-list mobile-only">
+        <!-- Step 1 -->
+        <div class="mobile-step">
+          <div class="mobile-step-header">
+            <div class="step-badge">
+              <span>01</span>
+            </div>
+            <h3 class="mobile-step-title">Buat Profil & Daftarkan Karyamu</h3>
+          </div>
+          <p class="mobile-step-desc">
+            Lengkapi data diri dan unggah file edugame atau portofoliomu ke dalam katalog profesional kami. Tentukan spesialisasi dan kualifikasi karyamu dengan mudah.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="mobile-step">
+          <div class="mobile-step-header">
+            <div class="step-badge">
+              <span>02</span>
+            </div>
+            <h3 class="mobile-step-title">Asah Skill & Ikuti Event</h3>
+          </div>
+          <p class="mobile-step-desc">
+            Ikuti berbagai workshop intensif dan festival nasional untuk memvalidasi kualitas karyamu. Bertemu mentor yang akan membimbingmu menghaluskan mekanik game.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="mobile-step">
+          <div class="mobile-step-header">
+            <div class="step-badge">
+              <span>03</span>
+            </div>
+            <h3 class="mobile-step-title">Hubungkan ke Mitra & Monetisasi</h3>
+          </div>
+          <p class="mobile-step-desc">
+            Manfaatkan fitur business matching untuk bertemu pembeli atau investor dan mulai hasilkan pendapatan dari passion-mu dalam membuat game.
+          </p>
         </div>
       </div>
     </div>
@@ -86,7 +128,35 @@
   margin-bottom: 64px;
 }
 
-/* ── Timeline ── */
+/* ── Badge (Shared Style) ── */
+.step-badge {
+  flex-shrink: 0;
+  width: 90px;
+  height: 100px;
+  background-color: var(--color-primary);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-7deg);
+  box-shadow: -7px 7px 0px var(--color-accent);
+}
+
+.step-badge span {
+  font-size: 42px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+/* ── Desktop Styles ── */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
 .steps-timeline {
   position: relative;
   display: flex;
@@ -104,7 +174,6 @@
   z-index: 0;
 }
 
-/* ── 2-Column Grid Rows ── */
 .step-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -119,24 +188,20 @@
   flex-direction: column;
 }
 
-/* Text on left side of row (col 1) -> align right towards center */
 .step-cell--text-right {
   text-align: right;
   align-items: flex-end;
 }
 
-/* Text on right side of row (col 2) -> align left away from center */
 .step-cell--text-left {
   text-align: left;
   align-items: flex-start;
 }
 
-/* Badge on right side of row (col 2) -> align left near center */
 .step-cell--badge-left {
   align-items: flex-start;
 }
 
-/* Badge on left side of row (col 1) -> align right near center */
 .step-cell--badge-right {
   align-items: flex-end;
 }
@@ -157,84 +222,57 @@
   max-width: 380px;
 }
 
-/* ── Badges ── */
-.step-badge {
-  width: 90px;
-  height: 100px;
-  background-color: var(--color-primary);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.steps-timeline .step-badge,
+.mobile-only .step-badge {
   transform: rotate(-7deg);
-  box-shadow: -7px 7px 0px #facc15; /* Yellow shadow offset behind the blue badge */
-  transition: transform 0.3s ease;
 }
 
-.step-badge:hover {
-  transform: rotate(-4deg) scale(1.04);
-}
-
-.step-badge span {
-  font-size: 42px;
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -1px;
-}
-
-/* ── Responsive ── */
+/* ── Mobile Styles ── */
 @media (max-width: 768px) {
-  .steps-section {
-    padding: 56px 0;
-  }
-
-  .steps-main-title {
-    font-size: 26px;
-    margin-bottom: 40px;
-  }
-
-  .steps-svg-line {
+  .desktop-only {
     display: none;
   }
-
-  .steps-timeline {
-    gap: 40px;
-  }
-
-  .step-row {
+  .mobile-only {
     display: flex;
     flex-direction: column;
+    gap: 48px;
+  }
+
+  .mobile-step {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .mobile-step-header {
+    display: flex;
     align-items: center;
-    text-align: center;
     gap: 20px;
   }
 
-  .step-cell--text-right,
-  .step-cell--text-left {
-    text-align: center;
-    align-items: center;
-  }
-
-  .step-cell--badge-left,
-  .step-cell--badge-right {
-    align-items: center;
-    order: -1; /* Place badge above text on mobile */
-  }
-
-  .step-desc {
-    max-width: 100%;
-  }
-
-  .step-title {
+  .mobile-step-title {
     font-size: 20px;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin: 0;
+    line-height: 1.3;
   }
 
-  .step-badge {
+  .mobile-step-desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  .mobile-only .step-badge {
     width: 80px;
     height: 90px;
+    border-radius: 14px;
+    box-shadow: -6px 6px 0px var(--color-accent);
   }
 
-  .step-badge span {
+  .mobile-only .step-badge span {
     font-size: 36px;
   }
 }
