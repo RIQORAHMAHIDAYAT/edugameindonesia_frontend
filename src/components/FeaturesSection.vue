@@ -11,11 +11,11 @@
 
       <!-- Main Content Grid / Wrapper -->
       <div class="features-grid">
-        <!-- Card 1: Portofolio & Katalog Karya (gambar_2.png) -->
+        <!-- Card 1: Portofolio & Katalog Karya (gambar_3.jpeg) -->
         <div class="feature-card card-portfolio">
           <div class="card-image-wrap">
             <img
-              src="/gambar_2.png"
+              src="/gambar_3.jpeg"
               alt="Portofolio & Katalog Karya"
               class="card-img"
               loading="lazy"
@@ -29,11 +29,11 @@
           </div>
         </div>
 
-        <!-- Card 2: Festival Nasional (gambar_3.png) -->
+        <!-- Card 2: Festival Nasional (gambar_1.jpeg) -->
         <div class="feature-card card-festival">
           <div class="card-image-wrap">
             <img
-              src="/gambar_3.png"
+              src="/gambar_1.jpeg"
               alt="Festival Nasional"
               class="card-img"
               loading="lazy"
@@ -47,11 +47,11 @@
           </div>
         </div>
 
-        <!-- Card 3: Pelatihan & Workshop Terarah (gambar_1.png) -->
+        <!-- Card 3: Pelatihan & Workshop Terarah (gambar_2.jpeg) -->
         <div class="feature-card card-training">
           <div class="card-image-wrap card-image-wrap--training">
             <img
-              src="/gambar_1.png"
+              src="/gambar_2.jpeg"
               alt="Pelatihan & Workshop Terarah"
               class="card-img"
               loading="lazy"
@@ -67,12 +67,12 @@
           </div>
         </div>
 
-        <!-- Card 4: Business Matching (gambar_4.png) -->
+        <!-- Card 4: Business Matching (gambar_4.jpeg) -->
         <div class="feature-card card-business">
           <div class="card-business-inner">
             <div class="card-image-wrap card-image-wrap--business">
               <img
-                src="/gambar_4.png"
+                src="/gambar_4.jpeg"
                 alt="Business Matching"
                 class="card-img"
                 loading="lazy"
@@ -143,7 +143,7 @@
 }
 
 .card-portfolio .card-image-wrap {
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 16 / 9;
 }
 
 .card-portfolio .card-content {
@@ -160,7 +160,7 @@
 }
 
 .card-festival .card-image-wrap {
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 16 / 9;
 }
 
 .card-festival .card-content {
@@ -214,11 +214,11 @@
 }
 
 .card-image-wrap--training {
-  aspect-ratio: 8 / 5;
+  aspect-ratio: 16 / 10;
 }
 
 .card-content--training {
-  padding: 24px 14px 28px;
+  padding: 32px 24px;
   text-align: center;
 }
 
@@ -263,7 +263,10 @@
 }
 
 .card-portfolio .card-img,
-.card-festival .card-img,
+.card-festival .card-img {
+  object-fit: contain;
+}
+
 .card-training .card-img {
   object-fit: contain;
 }

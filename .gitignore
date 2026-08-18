@@ -37,3 +37,9 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# Artefak tools otomatisasi / browser (Playwright MCP, dsb.)
+.playwright-mcp/
+
+# Folder aset sumber mentah (gambar terpakai sudah disalin ke public/)
+gambar_asset/

@@ -17,4 +17,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    watch: {
+      // Abaikan file aset gambar yang sering di-lock Windows (OneDrive/antivirus)
+      // agar watcher Vite tidak crash dengan error EBUSY.
+      ignored: ['**/gambar_asset/**', '**/public/gambar_*.jpeg'],
+    },
+  },
 })
