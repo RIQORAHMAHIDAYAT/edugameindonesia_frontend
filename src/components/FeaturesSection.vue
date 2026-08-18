@@ -139,10 +139,15 @@
   grid-column: 1 / 2;
   grid-row: 1 / 2;
   background-color: #ccd2d9;
+  padding: 20px 20px 0;
 }
 
 .card-portfolio .card-image-wrap {
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 2 / 1;
+}
+
+.card-portfolio .card-content {
+  padding: 20px 10px 24px;
 }
 
 /* Card 2: Festival */
@@ -151,10 +156,15 @@
   grid-row: 1 / 2;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
+  padding: 20px 20px 0;
 }
 
 .card-festival .card-image-wrap {
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 2 / 1;
+}
+
+.card-festival .card-content {
+  padding: 20px 10px 24px;
 }
 
 /* Card 4: Business Matching */
@@ -200,14 +210,15 @@
   background-color: #175499;
   display: flex;
   flex-direction: column;
+  padding: 20px 20px 0;
 }
 
 .card-image-wrap--training {
-  aspect-ratio: 16 / 13;
+  aspect-ratio: 8 / 5;
 }
 
 .card-content--training {
-  padding: 32px 24px;
+  padding: 24px 14px 28px;
   text-align: center;
 }
 
@@ -240,6 +251,7 @@
 .card-image-wrap {
   width: 100%;
   overflow: hidden;
+  border-radius: 14px;
   background-color: #f1f5f9;
 }
 
@@ -248,6 +260,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.card-portfolio .card-img,
+.card-festival .card-img,
+.card-training .card-img {
+  object-fit: contain;
 }
 
 .card-content {
