@@ -64,7 +64,7 @@ function closeMenu() {
     <div class="nb__inner">
       <!-- Logo -->
       <a href="#beranda" class="nb__logo" @click="closeMenu">
-        LOGO
+        <img src="/Logo_edugame.png" alt="Logo Edugame" class="nb__logo-img" />
       </a>
 
       <!-- Centre links -->
@@ -107,6 +107,9 @@ function closeMenu() {
       >
         {{ link.label }}
       </a>
+      <a href="#gabung" class="nb__mobile-link nb__mobile-cta" @click="closeMenu">
+        GABUNG KOMUNITAS
+      </a>
     </div>
   </header>
 </template>
@@ -141,6 +144,13 @@ function closeMenu() {
   flex-shrink: 0;
   margin-right: 48px;
   line-height: 1;
+}
+
+.nb__logo-img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
 }
 
 .nb__logo-accent {
@@ -242,6 +252,19 @@ function closeMenu() {
   color: var(--color-primary);
 }
 
+.nb__mobile-cta {
+  margin-top: 10px;
+  background: var(--color-primary);
+  color: #ffffff;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.nb__mobile-cta:hover {
+  background: var(--color-primary-hover);
+  color: #ffffff;
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
   .nb__nav {
@@ -262,6 +285,14 @@ function closeMenu() {
   .nb__logo {
     font-size: 28px;
     margin-right: 12px;
+  }
+}
+
+/* Layar sangat sempit: sembunyikan tombol GABUNG di header,
+   link GABUNG tetap tersedia di dalam menu mobile */
+@media (max-width: 400px) {
+  .nb__cta {
+    display: none;
   }
 }
 </style>

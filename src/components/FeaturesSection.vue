@@ -214,7 +214,7 @@
 }
 
 .card-image-wrap--training {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 13;
 }
 
 .card-content--training {
@@ -263,12 +263,9 @@
 }
 
 .card-portfolio .card-img,
-.card-festival .card-img {
-  object-fit: contain;
-}
-
+.card-festival .card-img,
 .card-training .card-img {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .card-content {
