@@ -1,11 +1,23 @@
 <template>
   <section id="beranda" class="hero">
-    <!-- Organic blob shape via clip-path — matches reference exactly -->
-    <div class="hero__blob" aria-hidden="true"></div>
+    <!-- Background: Board game photo with gradient overlays -->
+    <div class="hero__bg-container" aria-hidden="true">
+      <img
+        src="/images/gambar_bermain1.jpg"
+        alt="Komunitas bermain edugame bersama"
+        class="hero__bg-image"
+        fetchpriority="high"
+        loading="eager"
+      />
+      <!-- Left-to-Right white fade: covers text area on left -->
+      <div class="hero__overlay-left"></div>
+      <!-- Bottom white fade/blur: dissolves image softly at the bottom into the next section -->
+      <div class="hero__overlay-bottom"></div>
+    </div>
 
+    <!-- Main Content Container -->
     <div class="hero__container">
-      <!-- ── Left: Text ── -->
-      <div class="hero__text">
+      <div class="hero__content">
         <h1 class="hero__title">
           Ubah Ide Game<br />
           Ciptaanmu<br />
@@ -25,25 +37,9 @@
         <!-- Button with yellow shadow offset (matches design) -->
         <div class="hero__cta-wrapper">
           <span class="hero__cta-shadow" aria-hidden="true"></span>
-          <a href="#gabung" class="hero__cta">GABUNG KOMUNITAS &nbsp;→</a>
-        </div>
-      </div>
-
-      <!-- ── Right: Photo ── -->
-      <div class="hero__photo-wrap">
-        <div class="hero__photo-frame">
-          <picture>
-            <source srcset="/hero-team.webp" type="image/webp" />
-              <img
-                src="/hero-team.png"
-                alt="Tim Edugame Indonesia berkolaborasi"
-                class="hero__photo"
-                width="430"
-                height="550"
-                fetchpriority="high"
-                loading="eager"
-              />
-          </picture>
+          <a href="#gabung" class="hero__cta">
+            Gabung Komunitas&nbsp;→
+          </a>
         </div>
       </div>
     </div>
@@ -52,90 +48,127 @@
 
 <style scoped>
 /* ─────────────────────────────────────────
-   HERO
+   HERO SECTION
 ───────────────────────────────────────── */
 .hero {
-  background: #ffffff;
   position: relative;
-  overflow: visible;
-  min-height: 640px;
-  clip-path: inset(0 -2000px -2000px -2000px); /* clip top at hero boundary, allow blob to extend down & sides */
+  background-color: #ffffff;
+  min-height: 100vh; /* Memastikan hero section memenuhi satu layar penuh */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 100px;
+  padding-bottom: 60px;
 }
 
-/*
-  Gray background shape — matches Figma: 1083×885px rounded rect
-  Rotated -13deg. Large so photo sits inside it.
-  overflow:hidden on .hero clips excess.
-*/
-.hero__blob {
+/* ─── Background & Overlays ─── */
+.hero__bg-container {
   position: absolute;
-  top: 80%;
-  right: -100px;
-  transform: translateY(-50%) rotate(-9.5deg);
-  width: 1100px;
-  height: 900px;
-  background: #e8eaf0;
-  border-radius: 90px;
-  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
-
-/* ─── Container ─── */
-.hero__container {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 56px 40px 72px;
-  display: grid;
-  grid-template-columns: 48% 52%;
-  align-items: center;
-  min-height: 640px;
+.hero__bg-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 65%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
-/* ─── Left text ─── */
-.hero__text {
+/* Left-to-right white gradient: ensures text on left is crystal clear */
+.hero__overlay-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 68%;
+  background: linear-gradient(
+    to right,
+    #ffffff 0%,
+    #ffffff 50%,
+    rgba(255, 255, 255, 0.92) 68%,
+    rgba(255, 255, 255, 0.45) 84%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 2;
+}
+
+/* Bottom fade: softens the bottom of the photo into the page */
+.hero__overlay-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 140px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    #ffffff 100%
+  );
+  z-index: 3;
+}
+
+/* ─── Foreground Content ─── */
+.hero__container {
+  position: relative;
+  z-index: 10;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.hero__content {
+  max-width: 580px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
+/* ─── Hero Title ─── */
 .hero__title {
-  font-size: 60px;
+  font-size: 64px;
   font-weight: 900;
-  line-height: 1.07;
+  line-height: 1.06;
   color: var(--color-primary);
   margin: 0 0 28px 0;
   letter-spacing: -2px;
 }
 
-/* Yellow left-border description */
+/* ─── Subtitle with yellow left accent bar ─── */
 .hero__subtitle-wrap {
-  border-left: 4px solid #ffd700;
+  border-left: 3.5px solid #ffd700;
   padding-left: 14px;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 .hero__subtitle {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.7;
   color: #55667a;
   margin: 0;
-  max-width: 360px;
+  max-width: 440px;
 }
 
-/* ─── CTA Button with yellow shadow offset ─── */
+/* ─── CTA Button with Yellow Shadow Offset ─── */
 .hero__cta-wrapper {
   position: relative;
   display: inline-block;
 }
 
-/* Yellow block behind button — offset bottom-right */
+/* Yellow block offset behind button */
 .hero__cta-shadow {
   position: absolute;
-  bottom: -7px;
-  right: -7px;
+  bottom: -6px;
+  right: -6px;
   width: 100%;
   height: 100%;
   background: #ffd700;
@@ -151,85 +184,70 @@
   align-items: center;
   background: var(--color-primary);
   color: #ffffff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  padding: 14px 26px;
+  letter-spacing: 0.5px;
+  padding: 14px 28px;
   border-radius: 4px;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s ease, transform 0.15s ease;
   white-space: nowrap;
 }
 
 .hero__cta:hover {
   background: var(--color-primary-hover);
+  transform: translate(-1px, -1px);
 }
 
-/* ─── Right photo ─── */
-.hero__photo-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-left: 10px;
-}
-
-.hero__photo-frame {
-  position: relative;
-  width: 100%;
-  max-width: 430px;
-  z-index: 1; /* create a stacking context */
-}
-
-/* Bingkai kuning di belakang gambar */
-.hero__photo-frame::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  /* Centering absolut agar simetris sempurna di SEMUA sisi (kiri-kanan, atas-bawah) */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 80px);  /* Lebih lebar dari gambar */
-  height: calc(100% - 120px); /* Lebih pendek dari gambar */
-  background: #ffd700;
-  border: 2px solid var(--color-primary);
-  border-radius: 0;
-}
-
-.hero__photo {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 550px;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  /* Border navy/dark blue tipis */
-  border: 2px solid var(--color-primary);
-  border-radius: 0; /* Kotak/sharp */
-}
-
-/* ─── Responsive ─── */
-@media (max-width: 960px) {
+/* ─── Responsive Media Queries ─── */
+@media (max-width: 1024px) {
   .hero {
-    min-height: 0;
+    min-height: 100vh;
+    padding-top: 90px;
   }
-  .hero__blob {
-    display: block;
-    width: 420px;
-    height: 350px;
-    top: 50%;
-    right: -90px;
-    transform: translateY(-50%) rotate(-13deg);
-    border-radius: 35px;
+  .hero__title {
+    font-size: 50px;
   }
+  .hero__bg-image {
+    width: 75%;
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: 85px;
+    padding-bottom: 50px;
+  }
+  .hero__bg-image {
+    width: 100%;
+    opacity: 0.25;
+  }
+  .hero__overlay-left {
+    width: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+  }
+  .hero__title {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+  .hero__subtitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
   .hero__container {
-    grid-template-columns: 1fr;
-    padding: 48px 24px 56px;
-    min-height: 0;
+    padding: 0 20px;
   }
-  .hero__title { font-size: 38px; }
-  .hero__photo-wrap { display: none; }
+  .hero__title {
+    font-size: 32px;
+    letter-spacing: -0.5px;
+  }
 }
 </style>

@@ -15,7 +15,7 @@
         <div class="feature-card card-portfolio">
           <div class="card-image-wrap">
             <img
-              src="/gambar_3.jpeg"
+              src="/images/gambar_3.jpeg"
               alt="Portofolio & Katalog Karya"
               class="card-img"
               loading="lazy"
@@ -33,7 +33,7 @@
         <div class="feature-card card-festival">
           <div class="card-image-wrap">
             <img
-              src="/gambar_1.jpeg"
+              src="/images/gambar_1.jpeg"
               alt="Festival Nasional"
               class="card-img"
               loading="lazy"
@@ -51,7 +51,7 @@
         <div class="feature-card card-training">
           <div class="card-image-wrap card-image-wrap--training">
             <img
-              src="/gambar_2.jpeg"
+              src="/images/gambar_2.jpeg"
               alt="Pelatihan & Workshop Terarah"
               class="card-img"
               loading="lazy"
@@ -72,7 +72,7 @@
           <div class="card-business-inner">
             <div class="card-image-wrap card-image-wrap--business">
               <img
-                src="/gambar_4.jpeg"
+                src="/images/gambar_4.jpeg"
                 alt="Business Matching"
                 class="card-img"
                 loading="lazy"

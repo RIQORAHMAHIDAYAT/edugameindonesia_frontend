@@ -2,6 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 const isOpen = ref(false)
+const isScrolled = ref(false)
 const activeSection = ref('beranda')
 
 const navLinks = [
@@ -19,6 +20,8 @@ function updateActiveSection() {
   ticking = true
   requestAnimationFrame(() => {
     ticking = false
+    isScrolled.value = window.scrollY > 30
+
     const probe = window.scrollY + 120
     let current = sectionIds[0] ?? 'beranda'
 
@@ -43,11 +46,11 @@ onMounted(() => {
   window.addEventListener('scroll', updateActiveSection, { passive: true })
   updateActiveSection()
   window.addEventListener('click', (e) => {
-    const nav = document.querySelector('.nb');
+    const nav = document.querySelector('.nb')
     if (nav && !nav.contains(e.target as Node)) {
-      closeMenu();
+      closeMenu()
     }
-  });
+  })
 })
 
 onBeforeUnmount(() => {
@@ -60,29 +63,31 @@ function closeMenu() {
 </script>
 
 <template>
-  <header class="nb">
+  <header class="nb" :class="{ 'nb--scrolled': isScrolled }">
     <div class="nb__inner">
       <!-- Logo -->
       <a href="#beranda" class="nb__logo" @click="closeMenu">
-        <img src="/Logo_edugame.png" alt="Logo Edugame" class="nb__logo-img" />
+        <img src="/images/Logo_edugame.png" alt="Logo Komunitas Game Indonesia" class="nb__logo-img" />
       </a>
 
-      <!-- Centre links -->
-      <nav class="nb__nav" aria-label="Navigasi utama">
-        <a
-          v-for="link in navLinks"
-          :key="link.href"
-          :href="link.href"
-          class="nb__link"
-          :class="{ 'nb__link--active': activeSection === link.id }"
-          @click="closeMenu"
-        >
-          {{ link.label }}
-        </a>
-      </nav>
+      <!-- Capsule Nav + CTA (Matches Reference Design) -->
+      <div class="nb__capsule">
+        <nav class="nb__nav" aria-label="Navigasi utama">
+          <a
+            v-for="link in navLinks"
+            :key="link.href"
+            :href="link.href"
+            class="nb__link"
+            :class="{ 'nb__link--active': activeSection === link.id }"
+            @click="closeMenu"
+          >
+            {{ link.label }}
+          </a>
+        </nav>
 
-      <!-- CTA -->
-      <a href="#gabung" class="nb__cta">GABUNG KOMUNITAS</a>
+        <!-- CTA Button inside capsule -->
+        <a href="#gabung" class="nb__cta">GABUNG SEKARANG</a>
+      </div>
 
       <!-- Hamburger (mobile) -->
       <button
@@ -108,7 +113,7 @@ function closeMenu() {
         {{ link.label }}
       </a>
       <a href="#gabung" class="nb__mobile-link nb__mobile-cta" @click="closeMenu">
-        GABUNG KOMUNITAS
+        GABUNG SEKARANG
       </a>
     </div>
   </header>
@@ -117,106 +122,154 @@ function closeMenu() {
 <style scoped>
 /* ─── Navbar shell ─── */
 .nb {
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  background: #ffffff;
-  border-bottom: 1.5px solid #ebebeb;
+  background: transparent;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Optional sticky backdrop when scrolling */
+.nb--scrolled {
+  position: fixed;
+  background: transparent;
+  box-shadow: none;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  pointer-events: none; /* Memastikan area kosong tidak menghalangi klik ke elemen di bawahnya */
+}
+
+.nb--scrolled .nb__inner > * {
+  pointer-events: auto; /* Elemen navbar (logo, menu) tetap bisa diklik */
 }
 
 .nb__inner {
-  width: 100%;
-  height: 68px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
   display: flex;
   align-items: center;
-  gap: 0;
-  padding-left: max(40px, calc((100% - 1200px) / 2 + 40px));
-  padding-right: 40px;
+  justify-content: space-between;
 }
 
 /* ─── Logo ─── */
 .nb__logo {
-  font-size: 32px;
-  font-weight: 900;
-  color: var(--color-primary);
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  letter-spacing: -1px;
   flex-shrink: 0;
-  margin-right: 48px;
-  line-height: 1;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.nb--scrolled .nb__logo {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  pointer-events: none;
 }
 
 .nb__logo-img {
-  max-width: 150px;
-  width: 100%;
+  max-width: 160px;
   height: auto;
-  flex-shrink: 0;
+  display: block;
 }
 
-.nb__logo-accent {
-  color: var(--color-accent);
+/* ─── Capsule Pill Container (Reference Design) ─── */
+.nb__capsule {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 9999px;
+  padding: 6px 8px 6px 32px;
+  box-shadow: 0 4px 25px rgba(0, 63, 123, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 63, 123, 0.08);
+  gap: 32px;
+  transition: all 0.3s ease;
+}
+
+/* Glassy effect on scroll for the capsule itself */
+.nb--scrolled .nb__capsule {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* ─── Nav links ─── */
 .nb__nav {
   display: flex;
-  gap: 32px;
-  margin-left: auto;
+  align-items: center;
+  gap: 28px;
 }
 
 .nb__link {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
-  color: #2d2d2d;
+  color: var(--color-primary);
   text-decoration: none;
-  letter-spacing: 0.5px;
-  padding-bottom: 3px;
-  border-bottom: 2.5px solid transparent;
+  letter-spacing: 0.8px;
+  padding: 6px 0;
+  position: relative;
   white-space: nowrap;
-  transition: color 0.15s;
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .nb__link:hover {
-  color: var(--color-primary);
+  opacity: 0.75;
 }
 
-.nb__link--active {
-  color: var(--color-primary);
-  border-bottom-color: var(--color-primary);
+.nb__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px;
 }
 
-/* ─── CTA ─── */
+/* ─── CTA inside capsule ─── */
 .nb__cta {
-  margin-left: 32px;
-  flex-shrink: 0;
   background: var(--color-primary);
   color: #ffffff;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  padding: 12px 22px;
-  border-radius: 4px;
+  padding: 12px 26px;
+  border-radius: 9999px;
   text-decoration: none;
   white-space: nowrap;
-  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .nb__cta:hover {
   background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 63, 123, 0.25);
 }
 
-/* ─── Hamburger ─── */
+/* ─── Hamburger (mobile) ─── */
 .nb__ham {
   display: none;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  background: none;
-  border: none;
+  background: #ffffff;
+  border: 1px solid rgba(0, 63, 123, 0.1);
+  border-radius: 8px;
   cursor: pointer;
-  padding: 4px;
-  margin-left: auto;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .nb__ham span {
@@ -227,37 +280,44 @@ function closeMenu() {
   border-radius: 2px;
 }
 
-/* ─── Mobile menu ─── */
+/* ─── Mobile menu dropdown ─── */
 .nb__mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 12px 24px 16px;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  right: 16px;
   background: #ffffff;
-  border-top: 1px solid #ebebeb;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0, 63, 123, 0.12);
+  border: 1px solid rgba(0, 63, 123, 0.08);
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .nb__mobile-link {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  color: #2d2d2d;
+  color: var(--color-primary);
   text-decoration: none;
-  padding: 10px 8px;
-  border-radius: 6px;
-  letter-spacing: 0.4px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
 }
 
 .nb__mobile-link:hover {
-  background: #f4f6fb;
-  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .nb__mobile-cta {
-  margin-top: 10px;
+  margin-top: 6px;
   background: var(--color-primary);
   color: #ffffff;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 9999px;
+  padding: 12px 20px;
 }
 
 .nb__mobile-cta:hover {
@@ -267,32 +327,20 @@ function closeMenu() {
 
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
-  .nb__nav {
+  .nb__capsule {
     display: none;
-  }
-  .nb__cta {
-    margin-left: auto;
-    font-size: 11px;
-    padding: 8px 14px;
   }
   .nb__ham {
     display: flex;
-    margin-left: 12px;
+  }
+  .nb__mobile {
+    display: flex;
   }
   .nb__inner {
     padding: 0 16px;
   }
-  .nb__logo {
-    font-size: 28px;
-    margin-right: 12px;
-  }
-}
-
-/* Layar sangat sempit: sembunyikan tombol GABUNG di header,
-   link GABUNG tetap tersedia di dalam menu mobile */
-@media (max-width: 400px) {
-  .nb__cta {
-    display: none;
+  .nb__logo-img {
+    max-width: 135px;
   }
 }
 </style>

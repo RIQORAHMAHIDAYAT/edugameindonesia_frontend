@@ -5,7 +5,7 @@
         <!-- Col 1: Brand -->
         <div class="footer-col footer-col--brand">
           <h2 class="footer-logo">
-            <img src="/Logo_edugame.png" alt="Logo Edugame" class="footer-logo-img" />
+            <img src="/images/Logo_edugame.png" alt="Logo Edugame" class="footer-logo-img" />
           </h2>
           <p class="footer-tagline">
             Pusat Ekosistem Edugame Indonesia, Tempat Berkarya, Belajar, dan Berbisnis.

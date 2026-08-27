@@ -1,279 +1,215 @@
-<template>
-  <section id="cara-kerja" class="steps-section">
-    <div class="steps-container">
-      <!-- Section Title -->
-      <h2 class="steps-main-title">3 Langkah Mudah Memulai</h2>
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-      <!-- Desktop Timeline (Visible on Large Screens) -->
-      <div class="steps-timeline desktop-only">
-        <!-- SVG Connecting Dashed Line -->
-        <svg class="steps-svg-line" viewBox="0 0 1000 480" fill="none" preserveAspectRatio="none" aria-hidden="true">
+const sectionRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
+
+let observer: IntersectionObserver | null = null
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0]?.isIntersecting) {
+        isVisible.value = true
+        // Optional: stop observing once animated
+        if (sectionRef.value) observer?.unobserve(sectionRef.value)
+      }
+    },
+    { threshold: 0.2 } // Mulai animasi saat 20% bagian terlihat
+  )
+
+  if (sectionRef.value) {
+    observer.observe(sectionRef.value)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (observer) observer.disconnect()
+})
+</script>
+
+<template>
+  <section class="w-full py-10 md:py-24 bg-white overflow-hidden font-sans">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-[#1E3A8A] text-center mb-8 md:mb-20">
+      3 Langkah Mudah Memulai
+    </h2>
+
+    <!-- Container dipersempit agar tidak renggang (Max 850px). ref="sectionRef" dan class "is-animated" mengontrol trigger animasi -->
+    <div ref="sectionRef" class="max-w-[850px] mx-auto px-6 relative z-10" :class="{ 'is-animated': isVisible }">
+      
+      <!-- SVG Connecting Dashed Line (Desktop Only) -->
+      <div class="hidden md:block absolute inset-0 pointer-events-none z-0">
+        <svg class="w-full h-full steps-svg-line" viewBox="0 0 850 600" fill="none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Garis zigzag presisi dari titik tengah dadu Kanan -> Kiri -> Kanan -->
           <path
-            d="M 570 65 L 430 240 L 570 415"
-            stroke="#94a3b8"
-            stroke-width="2.5"
-            stroke-dasharray="6 6"
+            d="M 530 100 L 320 300 L 530 500"
+            stroke="#94A3B8"
+            stroke-width="2"
+            stroke-dasharray="8 8"
           />
         </svg>
+      </div>
 
-        <!-- Step 1: Text Left, Badge Right -->
-        <div class="step-row">
-          <div class="step-cell step-cell--text-right">
-            <h3 class="step-title">Buat Profil & Daftarkan Karyamu</h3>
-            <p class="step-desc">
+      <div class="flex flex-col gap-6 md:gap-12 relative z-10 steps-container">
+        
+        <!-- STEP 1 -->
+        <div class="step-row relative w-full flex flex-col md:grid md:grid-cols-2 items-center md:gap-12">
+          <!-- Mobile Header (Visible only on mobile) -->
+          <div class="flex md:hidden items-center gap-3 w-full mb-1">
+            <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
+              <img src="/images/dadu/dadu_1_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 1" />
+            </div>
+            <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Buat Profil & Daftarkan Karyamu</h3>
+          </div>
+
+          <!-- Desktop Text (Col 1) & Mobile Description -->
+          <div class="step-text w-full order-2 md:order-1 text-left md:text-right">
+            <h3 class="hidden md:block text-2xl font-bold text-[#1E3A8A]">Buat Profil & Daftarkan Karyamu</h3>
+            <p class="text-gray-600 mt-1 md:mt-3 text-base leading-relaxed">
               Lengkapi data diri dan unggah file edugame atau portofoliomu ke dalam katalog profesional kami. Tentukan spesialisasi dan kualifikasi karyamu dengan mudah.
             </p>
           </div>
-          <div class="step-cell step-cell--badge-left">
-            <div class="step-badge">
-              <span>01</span>
+
+          <!-- Desktop Dice (Col 2) -->
+          <div class="hidden md:flex order-1 md:order-2 justify-start">
+            <div class="relative w-[160px] h-[160px] flex items-center justify-center">
+               <img src="/images/dadu/dadu_1_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="1" />
             </div>
           </div>
         </div>
 
-        <!-- Step 2: Badge Left, Text Right -->
-        <div class="step-row">
-          <div class="step-cell step-cell--badge-right">
-            <div class="step-badge">
-              <span>02</span>
+        <!-- STEP 2 -->
+        <div class="step-row relative w-full flex flex-col md:grid md:grid-cols-2 items-center md:gap-12">
+          <!-- Mobile Header -->
+          <div class="flex md:hidden items-center gap-3 w-full mb-1">
+            <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
+              <img src="/images/dadu/dadu_2_kuning-bg.png" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 2" />
+            </div>
+            <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Asah Skill & Ikuti Event</h3>
+          </div>
+
+          <!-- Desktop Dice (Col 1) -->
+          <div class="hidden md:flex order-1 justify-end">
+            <div class="relative w-[160px] h-[160px] flex items-center justify-center">
+               <img src="/images/dadu/dadu_2_kuning-bg.png" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="2" />
             </div>
           </div>
-          <div class="step-cell step-cell--text-left">
-            <h3 class="step-title">Asah Skill & Ikuti Event</h3>
-            <p class="step-desc">
+
+          <!-- Desktop Text (Col 2) & Mobile Description -->
+          <div class="step-text w-full order-2 text-left">
+            <h3 class="hidden md:block text-2xl font-bold text-[#1E3A8A]">Asah Skill & Ikuti Event</h3>
+            <p class="text-gray-600 mt-1 md:mt-3 text-base leading-relaxed">
               Ikuti berbagai workshop intensif dan festival nasional untuk memvalidasi kualitas karyamu. Bertemu mentor yang akan membimbingmu menghaluskan mekanik game.
             </p>
           </div>
         </div>
 
-        <!-- Step 3: Text Left, Badge Right -->
-        <div class="step-row">
-          <div class="step-cell step-cell--text-right">
-            <h3 class="step-title">Hubungkan ke Mitra & Monetisasi</h3>
-            <p class="step-desc">
+        <!-- STEP 3 -->
+        <div class="step-row relative w-full flex flex-col md:grid md:grid-cols-2 items-center md:gap-12">
+          <!-- Mobile Header -->
+          <div class="flex md:hidden items-center gap-3 w-full mb-1">
+            <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
+              <img src="/images/dadu/dadu_3_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 3" />
+            </div>
+            <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Hubungkan ke Mitra & Monetisasi</h3>
+          </div>
+
+          <!-- Desktop Text (Col 1) & Mobile Description -->
+          <div class="step-text w-full order-2 md:order-1 text-left md:text-right">
+            <h3 class="hidden md:block text-2xl font-bold text-[#1E3A8A]">Hubungkan ke Mitra & Monetisasi</h3>
+            <p class="text-gray-600 mt-1 md:mt-3 text-base leading-relaxed">
               Manfaatkan fitur business matching untuk bertemu pembeli atau investor dan mulai hasilkan pendapatan dari passion-mu dalam membuat game.
             </p>
           </div>
-          <div class="step-cell step-cell--badge-left">
-            <div class="step-badge">
-              <span>03</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Mobile List (Visible on Small Screens) - Matches Image Exactly -->
-      <div class="steps-list mobile-only">
-        <!-- Step 1 -->
-        <div class="mobile-step">
-          <div class="mobile-step-header">
-            <div class="step-badge">
-              <span>01</span>
+          <!-- Desktop Dice (Col 2) -->
+          <div class="hidden md:flex order-1 md:order-2 justify-start">
+            <div class="relative w-[160px] h-[160px] flex items-center justify-center">
+               <img src="/images/dadu/dadu_3_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="3" />
             </div>
-            <h3 class="mobile-step-title">Buat Profil & Daftarkan Karyamu</h3>
           </div>
-          <p class="mobile-step-desc">
-            Lengkapi data diri dan unggah file edugame atau portofoliomu ke dalam katalog profesional kami. Tentukan spesialisasi dan kualifikasi karyamu dengan mudah.
-          </p>
         </div>
 
-        <!-- Step 2 -->
-        <div class="mobile-step">
-          <div class="mobile-step-header">
-            <div class="step-badge">
-              <span>02</span>
-            </div>
-            <h3 class="mobile-step-title">Asah Skill & Ikuti Event</h3>
-          </div>
-          <p class="mobile-step-desc">
-            Ikuti berbagai workshop intensif dan festival nasional untuk memvalidasi kualitas karyamu. Bertemu mentor yang akan membimbingmu menghaluskan mekanik game.
-          </p>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="mobile-step">
-          <div class="mobile-step-header">
-            <div class="step-badge">
-              <span>03</span>
-            </div>
-            <h3 class="mobile-step-title">Hubungkan ke Mitra & Monetisasi</h3>
-          </div>
-          <p class="mobile-step-desc">
-            Manfaatkan fitur business matching untuk bertemu pembeli atau investor dan mulai hasilkan pendapatan dari passion-mu dalam membuat game.
-          </p>
-        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.steps-section {
-  background-color: #ffffff;
-  padding: 80px 0;
-  position: relative;
+/* --- INITIAL STATES (SEBELUM ANIMASI) --- */
+.step-dice {
+  opacity: 0;
+  transition: transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s ease-out;
 }
 
-.steps-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.steps-main-title {
-  text-align: center;
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin-bottom: 64px;
-}
-
-/* ── Badge (Shared Style) ── */
-.step-badge {
-  flex-shrink: 0;
-  width: 90px;
-  height: 100px;
-  background-color: var(--color-primary);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-7deg);
-  box-shadow: -7px 7px 0px var(--color-accent);
-}
-
-.step-badge span {
-  font-size: 42px;
-  font-weight: 800;
-  color: #ffffff;
-}
-
-/* ── Desktop Styles ── */
-.desktop-only {
-  display: block;
-}
-
-.mobile-only {
-  display: none;
-}
-
-.steps-timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
-}
-
+/* Teks dan Garis HANYA Fade-In (opacity), tanpa translate */
+.step-text, 
 .steps-svg-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
 }
 
-.step-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+/* Box 1 & 3: Menggelinding dari ujung kiri benar-benar LUAR layar (-100vw) */
+.step-row:nth-child(1) .step-dice,
+.step-row:nth-child(3) .step-dice {
+  transform: translateX(-100vw) rotate(-720deg) scale(1.5);
 }
-
-.step-cell {
-  display: flex;
-  flex-direction: column;
-}
-
-.step-cell--text-right {
-  text-align: right;
-  align-items: flex-end;
-}
-
-.step-cell--text-left {
-  text-align: left;
-  align-items: flex-start;
-}
-
-.step-cell--badge-left {
-  align-items: flex-start;
-}
-
-.step-cell--badge-right {
-  align-items: flex-end;
-}
-
-.step-title {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin: 0 0 12px 0;
-  line-height: 1.25;
-}
-
-.step-desc {
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: #64748b;
-  margin: 0;
-  max-width: 380px;
-}
-
-.steps-timeline .step-badge,
-.mobile-only .step-badge {
-  transform: rotate(-7deg);
-}
-
-/* ── Mobile Styles ── */
-@media (max-width: 768px) {
-  .desktop-only {
-    display: none;
+/* Untuk mobile sesuaikan transform awal dengan scale mobile yang lebih besar */
+@media (max-width: 767px) {
+  .step-row:nth-child(1) .step-dice,
+  .step-row:nth-child(3) .step-dice {
+    transform: translateX(-100vw) rotate(-720deg) scale(1.8);
   }
-  .mobile-only {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-  }
+}
 
-  .mobile-step {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+/* Box 2: Menggelinding dari ujung kanan benar-benar LUAR layar (+100vw) */
+.step-row:nth-child(2) .step-dice {
+  transform: translateX(100vw) rotate(720deg) scale(1.5);
+}
+@media (max-width: 767px) {
+  .step-row:nth-child(2) .step-dice {
+    transform: translateX(100vw) rotate(720deg) scale(1.8);
   }
+}
 
-  .mobile-step-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+/* --- ANIMATED STATES (KETIKA 'is-animated' DITERAPKAN DARI OBSERVER) --- */
+.is-animated .step-dice {
+  opacity: 1 !important;
+  transform: translateX(0) rotate(0deg) scale(1.5) !important;
+}
+@media (max-width: 767px) {
+  .is-animated .step-dice {
+    transform: translateX(0) rotate(0deg) scale(1.8) !important;
   }
+}
 
-  .mobile-step-title {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--color-primary);
-    margin: 0;
-    line-height: 1.3;
-  }
+/* Timing Stagger Box Dadu (Box 2 dan 3 menyusul Box 1) */
+.is-animated .step-row:nth-child(2) .step-dice { 
+  transition-delay: 0.2s; 
+}
+.is-animated .step-row:nth-child(3) .step-dice { 
+  transition-delay: 0.4s; 
+}
 
-  .mobile-step-desc {
-    font-size: 15px;
-    line-height: 1.65;
-    color: #4b5563;
-    margin: 0;
-  }
+/* Timing Teks (Mulai Fade-In setelah dadu menggelinding sedikit) */
+.is-animated .step-row:nth-child(1) .step-text { 
+  opacity: 1; 
+  transition-delay: 0.5s; 
+}
 
-  .mobile-only .step-badge {
-    width: 80px;
-    height: 90px;
-    border-radius: 14px;
-    box-shadow: -6px 6px 0px var(--color-accent);
-  }
+.is-animated .step-row:nth-child(2) .step-text { 
+  opacity: 1; 
+  transition-delay: 0.7s; 
+}
 
-  .mobile-only .step-badge span {
-    font-size: 36px;
-  }
+.is-animated .step-row:nth-child(3) .step-text { 
+  opacity: 1; 
+  transition-delay: 0.9s; 
+}
+
+/* Garis SVG muncul paling akhir */
+.is-animated .steps-svg-line { 
+  opacity: 1; 
+  transition-delay: 1.2s; 
 }
 </style>
