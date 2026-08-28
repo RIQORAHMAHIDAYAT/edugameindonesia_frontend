@@ -1,3 +1,38 @@
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+const sectionRef = ref<HTMLElement | null>(null)
+const isVisible = ref(false)
+let observer: IntersectionObserver | null = null
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0]?.isIntersecting) {
+        isVisible.value = true
+        if (sectionRef.value) observer?.unobserve(sectionRef.value)
+      }
+    },
+    { threshold: 0.15 }
+  )
+
+  if (sectionRef.value) {
+    const rect = sectionRef.value.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+      isVisible.value = true
+    } else {
+      observer.observe(sectionRef.value)
+    }
+  } else {
+    isVisible.value = true
+  }
+})
+
+onBeforeUnmount(() => {
+  if (observer) observer.disconnect()
+})
+</script>
+
 <template>
   <svg width="0" height="0" style="position: absolute; width: 0; height: 0" aria-hidden="true">
     <defs>
@@ -37,7 +72,7 @@
     </defs>
   </svg>
 
-  <section id="masalah" class="problem-section">
+  <section id="masalah" class="problem-section" ref="sectionRef" :class="{ 'is-animated': isVisible }">
     <div class="problem-container">
       <div class="problem-card-border">
         <div class="problem-card">
@@ -94,6 +129,56 @@
   padding: 48px 0 24px 0;
   position: relative; /* ensure stacking context above hero blob */
   z-index: 1;
+}
+
+/* ── Animation Initial & Target States ── */
+.problem-title-wrap {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.row--1 .pain-card,
+.row--2 .pain-card,
+.row--3 .pain-card {
+  opacity: 0;
+  transform: translateX(80px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.is-animated .problem-title-wrap {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+.is-animated .row--1 .pain-card {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.25s;
+}
+
+.is-animated .row--2 .pain-card {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.4s;
+}
+
+.is-animated .row--3 .pain-card {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.55s;
+}
+
+/* Interactive Hover effect for pain cards */
+.pain-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pain-card:hover {
+  transform: translateY(-4px);
 }
 
 .problem-container {
