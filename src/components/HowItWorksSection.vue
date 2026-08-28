@@ -3,29 +3,65 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const sectionRef = ref<HTMLElement | null>(null)
 const isVisible = ref(false)
+const colorPattern = ref<'blue-first' | 'yellow-first'>('blue-first')
 
 let observer: IntersectionObserver | null = null
 
 onMounted(() => {
+  // Selang-seling warna dadu setiap kali refresh menggunakan sessionStorage
+  const lastPattern = sessionStorage.getItem('kei_dice_pattern')
+  if (lastPattern === 'blue-first') {
+    colorPattern.value = 'yellow-first'
+  } else {
+    colorPattern.value = 'blue-first'
+  }
+  sessionStorage.setItem('kei_dice_pattern', colorPattern.value)
+
   observer = new IntersectionObserver(
     (entries) => {
       if (entries[0]?.isIntersecting) {
         isVisible.value = true
-        // Optional: stop observing once animated
         if (sectionRef.value) observer?.unobserve(sectionRef.value)
       }
     },
-    { threshold: 0.2 } // Mulai animasi saat 20% bagian terlihat
+    { threshold: 0.1 }
   )
 
   if (sectionRef.value) {
-    observer.observe(sectionRef.value)
+    // Jika elemen sudah masuk viewport atau IntersectionObserver belum/tidak menembus kondisi awal,
+    // periksa langsung menggunakan boundingClientRect atau set fallback
+    const rect = sectionRef.value.getBoundingClientRect()
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+      isVisible.value = true
+    } else {
+      observer.observe(sectionRef.value)
+    }
+  } else {
+    isVisible.value = true
   }
 })
 
 onBeforeUnmount(() => {
   if (observer) observer.disconnect()
 })
+
+const getDiceSrc = (step: number) => {
+  if (colorPattern.value === 'blue-first') {
+    // Pola A: Step 1 Biru, Step 2 Kuning, Step 3 Biru
+    return step === 2
+      ? '/images/dadu/dadu_2_kuning-bg.png'
+      : step === 1
+        ? '/images/dadu/dadu_1_biru-bg.png'
+        : '/images/dadu/dadu_3_biru-bg.png'
+  } else {
+    // Pola B: Step 1 Kuning, Step 2 Biru, Step 3 Kuning
+    return step === 2
+      ? '/images/dadu/dadu_2_biru-bg.png'
+      : step === 1
+        ? '/images/dadu/dadu_1_kuning-bg.png'
+        : '/images/dadu/dadu_3_kuning-bg.png'
+  }
+}
 </script>
 
 <template>
@@ -57,7 +93,7 @@ onBeforeUnmount(() => {
           <!-- Mobile Header (Visible only on mobile) -->
           <div class="flex md:hidden items-center gap-3 w-full mb-1">
             <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
-              <img src="/images/dadu/dadu_1_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 1" />
+              <img :src="getDiceSrc(1)" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 1" />
             </div>
             <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Buat Profil & Daftarkan Karyamu</h3>
           </div>
@@ -73,7 +109,7 @@ onBeforeUnmount(() => {
           <!-- Desktop Dice (Col 2) -->
           <div class="hidden md:flex order-1 md:order-2 justify-start">
             <div class="relative w-[160px] h-[160px] flex items-center justify-center">
-               <img src="/images/dadu/dadu_1_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="1" />
+               <img :src="getDiceSrc(1)" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="1" />
             </div>
           </div>
         </div>
@@ -83,7 +119,7 @@ onBeforeUnmount(() => {
           <!-- Mobile Header -->
           <div class="flex md:hidden items-center gap-3 w-full mb-1">
             <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
-              <img src="/images/dadu/dadu_2_kuning-bg.png" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 2" />
+              <img :src="getDiceSrc(2)" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 2" />
             </div>
             <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Asah Skill & Ikuti Event</h3>
           </div>
@@ -91,7 +127,7 @@ onBeforeUnmount(() => {
           <!-- Desktop Dice (Col 1) -->
           <div class="hidden md:flex order-1 justify-end">
             <div class="relative w-[160px] h-[160px] flex items-center justify-center">
-               <img src="/images/dadu/dadu_2_kuning-bg.png" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="2" />
+               <img :src="getDiceSrc(2)" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="2" />
             </div>
           </div>
 
@@ -109,7 +145,7 @@ onBeforeUnmount(() => {
           <!-- Mobile Header -->
           <div class="flex md:hidden items-center gap-3 w-full mb-1">
             <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
-              <img src="/images/dadu/dadu_3_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 3" />
+              <img :src="getDiceSrc(3)" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 3" />
             </div>
             <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Hubungkan ke Mitra & Monetisasi</h3>
           </div>
@@ -125,7 +161,7 @@ onBeforeUnmount(() => {
           <!-- Desktop Dice (Col 2) -->
           <div class="hidden md:flex order-1 md:order-2 justify-start">
             <div class="relative w-[160px] h-[160px] flex items-center justify-center">
-               <img src="/images/dadu/dadu_3_biru-bg.png" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="3" />
+               <img :src="getDiceSrc(3)" class="step-dice w-full h-full object-contain scale-[1.5] drop-shadow-xl" alt="3" />
             </div>
           </div>
         </div>
