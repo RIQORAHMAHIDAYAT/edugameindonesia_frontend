@@ -5,13 +5,13 @@
       <img
         src="/images/gambar_bermain1.jpg"
         alt="Komunitas bermain edugame bersama"
-        class="hero__bg-image"
+        class="hero__bg-image animate-settle"
         fetchpriority="high"
         loading="eager"
       />
       <!-- Left-to-Right white fade: covers text area on left -->
       <div class="hero__overlay-left"></div>
-      <!-- Bottom white fade/blur: dissolves image softly at the bottom into the next section -->
+      <!-- Bottom white fade/blur: softens the bottom of the photo into the page -->
       <div class="hero__overlay-bottom"></div>
     </div>
 
@@ -21,7 +21,14 @@
         <h1 class="hero__title">
           Ubah Ide Game<br />
           Ciptaanmu<br />
-          Menjadi Karier<br />
+          Menjadi <span class="hero__karier" role="text" aria-label="Karier">
+            <span class="karier-blue karier-anim">Karier</span>
+            <span class="kl karier-yellow" aria-hidden="true" style="animation-delay: -2s">Karier</span>
+            <span class="kl karier-lr" aria-hidden="true" style="animation-delay: -4s">Karier</span>
+            <span class="kl karier-rl" aria-hidden="true" style="animation-delay: -6s">Karier</span>
+            <span class="kl karier-radial-bt" aria-hidden="true" style="animation-delay: -8s">Karier</span>
+            <span class="kl karier-conic" aria-hidden="true" style="animation-delay: -10s">Karier</span>
+          </span><br />
           Berdampak di<br />
           Dunia<br />
           Pendidikan
@@ -36,7 +43,7 @@
 
         <!-- Button with yellow shadow offset (matches design) -->
         <div class="hero__cta-wrapper">
-          <span class="hero__cta-shadow" aria-hidden="true"></span>
+          <span class="hero__cta-shadow animate-shadow" aria-hidden="true"></span>
           <a href="#gabung" class="hero__cta">
             Gabung Komunitas&nbsp;→
           </a>
@@ -47,6 +54,133 @@
 </template>
 
 <style scoped>
+/* ─────────────────────────────────────────
+   EFFECTS (post-full-render)
+───────────────────────────────────────── */
+.animate-settle {
+  transform: scale(1.04);
+  transform-origin: right center;
+  animation: settleZoom 3s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.animate-shadow {
+  transform: translateY(4px);
+  animation: shadowSettle 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+@keyframes settleZoom {
+  0% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shadowSettle {
+  0% {
+    transform: translateY(5px);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ─────────────────────────────────────────
+   ANIMATED "KARIER" — 6 fase warna (siklus 12s)
+   Fase: biru → kuning → gradien LR → gradien RL
+         → radial → conic.
+   Fade-in & fade-out tiap fase sejajar (4%)
+   sehingga crossfade antar fase selalu opacity 1.
+───────────────────────────────────────── */
+.hero__karier {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.karier-anim {
+  animation: karierPhase 12s linear infinite;
+}
+
+.kl {
+  display: block;
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: karierPhase 12s linear infinite;
+  will-change: opacity;
+}
+
+@keyframes karierPhase {
+  0% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  16.67% {
+    opacity: 1;
+  }
+  20.67% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.karier-blue {
+  color: var(--color-primary);
+}
+
+.karier-yellow {
+  background-image: linear-gradient(#ffd700, #ffd700);
+}
+
+.karier-lr {
+  background-image: linear-gradient(to right, var(--color-primary), #ffd700);
+}
+
+.karier-rl {
+  background-image: linear-gradient(to left, var(--color-primary), #ffd700);
+}
+
+.karier-radial-bt {
+  background-image: radial-gradient(circle, var(--color-primary) 0%, #ffd700 100%);
+}
+
+.karier-conic {
+  background-image: conic-gradient(from 0deg, var(--color-primary), #ffd700, var(--color-primary));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-settle,
+  .animate-shadow {
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .karier-anim,
+  .kl {
+    animation: none !important;
+  }
+
+  .kl {
+    opacity: 0 !important;
+  }
+
+  .karier-blue {
+    opacity: 1 !important;
+  }
+}
+
 /* ─────────────────────────────────────────
    HERO SECTION
 ───────────────────────────────────────── */
