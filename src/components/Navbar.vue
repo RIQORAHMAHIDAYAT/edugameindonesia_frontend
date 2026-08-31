@@ -45,20 +45,32 @@ function updateActiveSection() {
 onMounted(() => {
   window.addEventListener('scroll', updateActiveSection, { passive: true })
   updateActiveSection()
-  window.addEventListener('click', (e) => {
-    const nav = document.querySelector('.nb')
-    if (nav && !nav.contains(e.target as Node)) {
-      closeMenu()
-    }
-  })
+  window.addEventListener('click', handleOutsideClick)
+  window.addEventListener('keydown', handleKeydown)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', updateActiveSection)
+  window.removeEventListener('click', handleOutsideClick)
+  window.removeEventListener('keydown', handleKeydown)
 })
 
 function closeMenu() {
   isOpen.value = false
+}
+
+function handleOutsideClick(e: MouseEvent) {
+  const nav = document.querySelector('.nb')
+  if (nav && !nav.contains(e.target as Node)) {
+    closeMenu()
+  }
+}
+
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape' && isOpen.value) {
+    closeMenu()
+    document.querySelector<HTMLButtonElement>('.nb__ham')?.focus()
+  }
 }
 </script>
 
@@ -94,7 +106,7 @@ function closeMenu() {
         class="nb__ham"
         :aria-expanded="isOpen"
         aria-controls="mobile-menu"
-        aria-label="Buka menu"
+        :aria-label="isOpen ? 'Tutup menu' : 'Buka menu'"
         @click="isOpen = !isOpen"
       >
         <span></span><span></span><span></span>
