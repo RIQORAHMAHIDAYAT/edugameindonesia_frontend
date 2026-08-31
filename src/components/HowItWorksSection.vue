@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useReveal } from '@/composables/useReveal'
 
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
 const colorPattern = ref<'blue-first' | 'yellow-first'>('blue-first')
-
-let observer: IntersectionObserver | null = null
+const { target: sectionRef, isVisible } = useReveal<HTMLElement>({ threshold: 0.1 })
 
 onMounted(() => {
   // Selang-seling warna dadu setiap kali refresh menggunakan sessionStorage
@@ -16,33 +14,6 @@ onMounted(() => {
     colorPattern.value = 'blue-first'
   }
   sessionStorage.setItem('kei_dice_pattern', colorPattern.value)
-
-  observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0]?.isIntersecting) {
-        isVisible.value = true
-        if (sectionRef.value) observer?.unobserve(sectionRef.value)
-      }
-    },
-    { threshold: 0.1 }
-  )
-
-  if (sectionRef.value) {
-    // Jika elemen sudah masuk viewport atau IntersectionObserver belum/tidak menembus kondisi awal,
-    // periksa langsung menggunakan boundingClientRect atau set fallback
-    const rect = sectionRef.value.getBoundingClientRect()
-    if (rect.top < window.innerHeight && rect.bottom >= 0) {
-      isVisible.value = true
-    } else {
-      observer.observe(sectionRef.value)
-    }
-  } else {
-    isVisible.value = true
-  }
-})
-
-onBeforeUnmount(() => {
-  if (observer) observer.disconnect()
 })
 
 const getDiceSrc = (step: number) => {
@@ -66,7 +37,7 @@ const getDiceSrc = (step: number) => {
 
 <template>
   <section class="w-full py-10 md:py-24 bg-white overflow-hidden font-sans">
-    <h2 class="text-3xl md:text-4xl font-extrabold text-[#1E3A8A] text-center mb-8 md:mb-20">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-primary text-center mb-8 md:mb-20">
       3 Langkah Mudah Memulai
     </h2>
 
@@ -95,12 +66,12 @@ const getDiceSrc = (step: number) => {
             <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
               <img :src="getDiceSrc(1)" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 1" />
             </div>
-            <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Buat Profil & Daftarkan Karyamu</h3>
+            <h3 class="step-text text-xl font-bold text-primary leading-tight">Buat Profil & Daftarkan Karyamu</h3>
           </div>
 
           <!-- Desktop Text (Col 1) & Mobile Description -->
           <div class="step-text w-full order-2 md:order-1 text-left md:text-right">
-            <h3 class="hidden md:block text-2xl font-bold text-[#1E3A8A]">Buat Profil & Daftarkan Karyamu</h3>
+            <h3 class="hidden md:block text-2xl font-bold text-primary">Buat Profil & Daftarkan Karyamu</h3>
             <p class="text-gray-600 mt-1 md:mt-3 text-base leading-relaxed">
               Lengkapi data diri dan unggah file edugame atau portofoliomu ke dalam katalog profesional kami. Tentukan spesialisasi dan kualifikasi karyamu dengan mudah.
             </p>
@@ -121,7 +92,7 @@ const getDiceSrc = (step: number) => {
             <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
               <img :src="getDiceSrc(2)" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 2" />
             </div>
-            <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Asah Skill & Ikuti Event</h3>
+            <h3 class="step-text text-xl font-bold text-primary leading-tight">Asah Skill & Ikuti Event</h3>
           </div>
 
           <!-- Desktop Dice (Col 1) -->
@@ -133,7 +104,7 @@ const getDiceSrc = (step: number) => {
 
           <!-- Desktop Text (Col 2) & Mobile Description -->
           <div class="step-text w-full order-2 text-left">
-            <h3 class="hidden md:block text-2xl font-bold text-[#1E3A8A]">Asah Skill & Ikuti Event</h3>
+            <h3 class="hidden md:block text-2xl font-bold text-primary">Asah Skill & Ikuti Event</h3>
             <p class="text-gray-600 mt-1 md:mt-3 text-base leading-relaxed">
               Ikuti berbagai workshop intensif dan festival nasional untuk memvalidasi kualitas karyamu. Bertemu mentor yang akan membimbingmu menghaluskan mekanik game.
             </p>
@@ -147,12 +118,12 @@ const getDiceSrc = (step: number) => {
             <div class="w-[60px] h-[60px] flex-shrink-0 flex items-center justify-center">
               <img :src="getDiceSrc(3)" class="step-dice w-full h-full object-contain scale-[1.8] drop-shadow-md" alt="Langkah 3" />
             </div>
-            <h3 class="step-text text-xl font-bold text-[#1E3A8A] leading-tight">Hubungkan ke Mitra & Monetisasi</h3>
+            <h3 class="step-text text-xl font-bold text-primary leading-tight">Hubungkan ke Mitra & Monetisasi</h3>
           </div>
 
           <!-- Desktop Text (Col 1) & Mobile Description -->
           <div class="step-text w-full order-2 md:order-1 text-left md:text-right">
-            <h3 class="hidden md:block text-2xl font-bold text-[#1E3A8A]">Hubungkan ke Mitra & Monetisasi</h3>
+            <h3 class="hidden md:block text-2xl font-bold text-primary">Hubungkan ke Mitra & Monetisasi</h3>
             <p class="text-gray-600 mt-1 md:mt-3 text-base leading-relaxed">
               Manfaatkan fitur business matching untuk bertemu pembeli atau investor dan mulai hasilkan pendapatan dari passion-mu dalam membuat game.
             </p>
@@ -247,5 +218,16 @@ const getDiceSrc = (step: number) => {
 .is-animated .steps-svg-line { 
   opacity: 1; 
   transition-delay: 1.2s; 
+}
+
+/* Accessibility: Matikan animasi jika pengguna mengaktifkan reduce-motion */
+@media (prefers-reduced-motion: reduce) {
+  .step-dice,
+  .step-text,
+  .steps-svg-line {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 </style>

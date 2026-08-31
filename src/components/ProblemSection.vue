@@ -1,36 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useReveal } from '@/composables/useReveal'
 
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
-let observer: IntersectionObserver | null = null
-
-onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0]?.isIntersecting) {
-        isVisible.value = true
-        if (sectionRef.value) observer?.unobserve(sectionRef.value)
-      }
-    },
-    { threshold: 0.15 }
-  )
-
-  if (sectionRef.value) {
-    const rect = sectionRef.value.getBoundingClientRect()
-    if (rect.top < window.innerHeight && rect.bottom >= 0) {
-      isVisible.value = true
-    } else {
-      observer.observe(sectionRef.value)
-    }
-  } else {
-    isVisible.value = true
-  }
-})
-
-onBeforeUnmount(() => {
-  if (observer) observer.disconnect()
-})
+const { target: sectionRef, isVisible } = useReveal<HTMLElement>({ threshold: 0.15 })
 </script>
 
 <template>
@@ -172,12 +143,8 @@ onBeforeUnmount(() => {
   transition-delay: 0.55s;
 }
 
-/* Interactive Hover effect for pain cards */
-.pain-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.pain-card:hover {
+/* Interactive hover untuk pain card (setelah state is-animated agar menang cascade) */
+.is-animated .pain-card:hover {
   transform: translateY(-4px);
 }
 
@@ -263,6 +230,7 @@ onBeforeUnmount(() => {
 .pain-card {
   border-left: 3px solid var(--color-accent);
   padding: 4px 0 4px 20px; /* Reduced vertical padding */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pain-title {

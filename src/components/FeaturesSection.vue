@@ -1,8 +1,22 @@
+<script setup lang="ts">
+import { useReveal } from '@/composables/useReveal'
+
+const { target: headerRef, isVisible: headerVisible } = useReveal({ threshold: 0.2 })
+const { target: card1Ref, isVisible: card1Visible } = useReveal({ threshold: 0.15 })
+const { target: card2Ref, isVisible: card2Visible } = useReveal({ threshold: 0.15 })
+const { target: card3Ref, isVisible: card3Visible } = useReveal({ threshold: 0.15 })
+const { target: card4Ref, isVisible: card4Visible } = useReveal({ threshold: 0.15 })
+</script>
+
 <template>
   <section id="fitur" class="features-section">
     <div class="features-container">
       <!-- Header -->
-      <div class="features-header">
+      <div
+        ref="headerRef"
+        class="features-header reveal-header"
+        :class="{ 'is-visible': headerVisible }"
+      >
         <h2 class="features-title">Apa Solusi Yang Kami Lakukan?</h2>
         <p class="features-subtitle">
           Komunitas Edugame Indonesia adalah ekosistem terpadu tempat kamu bisa belajar, berkarya, dan membangun karier di industri game edukasi. Kami hadir untuk membantu memajukan ide-idemu dari sekadar konsep hingga menjadi produk yang diakui dan menghasilkan.
@@ -12,7 +26,12 @@
       <!-- Main Content Grid / Wrapper -->
       <div class="features-grid">
         <!-- Card 1: Portofolio & Katalog Karya (gambar_3.jpeg) -->
-        <div class="feature-card card-portfolio">
+        <div
+          ref="card1Ref"
+          class="feature-card card-portfolio reveal-tilt-left"
+          :class="{ 'is-visible': card1Visible }"
+          :style="{ animationDelay: '0ms' }"
+        >
           <div class="card-image-wrap">
             <img
               src="/images/gambar_3.jpeg"
@@ -30,7 +49,12 @@
         </div>
 
         <!-- Card 2: Festival Nasional (gambar_1.jpeg) -->
-        <div class="feature-card card-festival">
+        <div
+          ref="card2Ref"
+          class="feature-card card-festival reveal-tilt-right"
+          :class="{ 'is-visible': card2Visible }"
+          :style="{ animationDelay: '140ms' }"
+        >
           <div class="card-image-wrap">
             <img
               src="/images/gambar_1.jpeg"
@@ -48,7 +72,12 @@
         </div>
 
         <!-- Card 3: Pelatihan & Workshop Terarah (gambar_2.jpeg) -->
-        <div class="feature-card card-training">
+        <div
+          ref="card3Ref"
+          class="feature-card card-training reveal-tilt-tall"
+          :class="{ 'is-visible': card3Visible }"
+          :style="{ animationDelay: '260ms' }"
+        >
           <div class="card-image-wrap card-image-wrap--training">
             <img
               src="/images/gambar_2.jpeg"
@@ -68,7 +97,12 @@
         </div>
 
         <!-- Card 4: Business Matching (gambar_4.jpeg) -->
-        <div class="feature-card card-business">
+        <div
+          ref="card4Ref"
+          class="feature-card card-business reveal-tilt-wide"
+          :class="{ 'is-visible': card4Visible }"
+          :style="{ animationDelay: '380ms' }"
+        >
           <div class="card-business-inner">
             <div class="card-image-wrap card-image-wrap--business">
               <img
@@ -104,7 +138,20 @@
   padding: 0 24px;
 }
 
-/* ── Header ── */
+/* ── Header Fade Reveal ── */
+.reveal-header {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-header.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .features-header {
   text-align: center;
   margin-bottom: 48px;
@@ -113,7 +160,7 @@
 .features-title {
   font-size: 32px;
   font-weight: 800;
-  color: #0056a4;
+  color: var(--color-primary);
   margin: 0 0 16px 0;
 }
 
@@ -132,6 +179,100 @@
   grid-template-rows: auto auto;
   gap: 24px;
   align-items: stretch;
+  perspective: 1100px; /* Perspective container untuk 3D tilt-in */
+}
+
+/* ── 3D Tilt-In Base Classes per Card Orientation ── */
+.feature-card {
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform-style: preserve-3d;
+  transform-origin: center bottom;
+  transition: transform 0.3s ease, box-shadow 0.25s ease;
+  will-change: opacity, transform;
+}
+
+/* Titik awal tiap orientasi disimpan di variabel agar dipakai keyframes reveal.
+   Animasi reveal tidak menimpa hover karena transition tetap menguasai transform. */
+.reveal-tilt-left {
+  --reveal-from: rotateX(14deg) rotateY(-8deg) translateY(28px) scale(0.96);
+}
+
+.reveal-tilt-right {
+  --reveal-from: rotateX(14deg) rotateY(8deg) translateY(28px) scale(0.96);
+}
+
+.reveal-tilt-tall {
+  --reveal-from: rotateX(12deg) rotateY(10deg) translateY(32px) scale(0.96);
+}
+
+.reveal-tilt-wide {
+  --reveal-from: rotateX(12deg) rotateY(0deg) translateY(28px) scale(0.97);
+}
+
+/* State Aktif saat masuk viewport — reveal via animation agar stagger
+   (animation-delay) tidak ikut menunda hover card. State akhir ditulis
+   sebagai rule normal (tanpa fill-forwards) supaya animasi tidak menimpa
+   transform hover. */
+.feature-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: cardRevealIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes cardRevealIn {
+  from {
+    opacity: 0;
+    transform: var(--reveal-from);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) rotateY(0deg) translateY(0) scale(1);
+  }
+}
+
+/* Hover effect setelah card aktif */
+.feature-card.is-visible:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.09);
+}
+
+/* ── Inner Image Subtle Zoom-In/Down ── */
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.08);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card.is-visible .card-img {
+  transform: scale(1);
+}
+
+/* Hover subtle zoom tambahan */
+.feature-card.is-visible:hover .card-img {
+  transform: scale(1.03);
+}
+
+/* Accessibility: Matikan animasi jika pengguna mengaktifkan reduce-motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-header,
+  .feature-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .card-img {
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* Card 1: Portofolio */
@@ -233,33 +374,11 @@
   line-height: 1.6;
 }
 
-/* ── Card Base ── */
-.feature-card {
-  border-radius: 28px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-}
-
-.feature-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
 .card-image-wrap {
   width: 100%;
   overflow: hidden;
   border-radius: 14px;
   background-color: #f1f5f9;
-}
-
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
 }
 
 .card-portfolio .card-img,
@@ -313,6 +432,14 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    perspective: none; /* Flat tilt di mobile agar tidak terdistorsi */
+  }
+
+  .reveal-tilt-left,
+  .reveal-tilt-right,
+  .reveal-tilt-tall,
+  .reveal-tilt-wide {
+    --reveal-from: translateY(24px) scale(0.97);
   }
 
   /* Urutan saat di Mobile/Tablet:
