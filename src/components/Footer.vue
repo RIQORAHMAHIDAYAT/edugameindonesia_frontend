@@ -123,10 +123,6 @@
   display: block;
 }
 
-.footer-logo-accent {
-  color: #ffd700; /* Yellow .id */
-}
-
 .footer-tagline {
   font-size: 14px;
   line-height: 1.6;
